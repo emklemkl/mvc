@@ -1,0 +1,39 @@
+
+header {
+    display: flex;
+    position: relative;
+    max-width: 100%;
+    background-color: #963;
+    background-size: cover;
+    filter:hue-rotate(330deg);
+    border:#8c92ac solid 4px;
+    padding: 0.7rem;
+    align-items: center;
+}
+
+nav ul{
+    display: flex;
+    position: relative;
+}
+
+.site-title {
+    font-size: 2rem;
+    background-color: rgba(144, 72, 90, 0.6);
+    border-radius: 50%;
+    padding: 0.7rem;
+    font-family:'Times New Roman', Times, serif;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    margin-left: 1.4rem;
+    padding: 0.7rem;
+    font-size: 1.4em;
+    color: #90485a;
+    background-color: #8c92ac;
+    border-radius: 1rem;
+}

@@ -1,0 +1,11 @@
+body {
+    background-color: #afb9d0;
+}
+
+.container {
+    display: flex;
+    position: relative;
+    /* width: 64rem; */
+    max-width: 100%;
+    justify-content: center;
+}

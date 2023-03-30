@@ -1,0 +1,28 @@
+p { 
+    font-size: 1.25em;
+    margin-bottom: 1.75rem;
+    padding-left: 1.4rem;
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 3.5rem;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 1.75rem;
+}
+
+h3 {
+font-size: 1.5em;
+margin-bottom: 1.75rem;
+
+}
+
+    .main-content {
+    max-width: 100%;
+    padding: 3.5rem 2rem;
+    background-color: rgba(255, 255, 255, 0.4);
+    width: 60vw
+}
