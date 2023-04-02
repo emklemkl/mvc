@@ -3,7 +3,7 @@ header {
     display: flex;
     position: relative;
     max-width: 100%;
-    background-color: #963;
+    background-color: rgb(126, 110, 110);
     background-size: cover;
     filter:hue-rotate(330deg);
     border:#8c92ac solid 4px;
@@ -33,7 +33,7 @@ a {
     margin-left: 1.4rem;
     padding: 0.7rem;
     font-size: 1.4em;
-    color: #90485a;
+    color: #eeb7c5;
     background-color: #8c92ac;
     border-radius: 1rem;
 }

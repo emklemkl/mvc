@@ -11,6 +11,6 @@ import './styles/app.css';
 // start the Stimulus application
 import './bootstrap';
 
-import hello from './js/hello';
+import'./js/hello.js';
 
-console.log(hello())
+// console.log(hello())

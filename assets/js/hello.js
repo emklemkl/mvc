@@ -1,3 +1,5 @@
 export default () => {
-    return `Yo yo - welcome to Encore!`
+    document.getElementsByTagName("a")[0].style.color = "green !important";
+    document.getElementsByTagName("a")[1].style.color = "green !important";
+    
 }

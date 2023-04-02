@@ -12,3 +12,13 @@ body {
     line-height: 1.4;
     font-family: sans-serif;
 }
+
+.a-reset {
+    text-decoration: none;
+    margin-left: 0;
+    padding: 0;
+    font-size: 1.25em;
+    color: #0a6aaa;
+    border-radius: 0;
+    background-color: rgba(255, 255, 255, 0);
+}

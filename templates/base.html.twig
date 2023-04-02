@@ -3,14 +3,16 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+            {% set currentPath = app.request.pathinfo %}
         <link rel="icon" href="{{ asset('img/glider.svg') }}">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
-
+            <script src="https://use.fontawesome.com/0aee473986.js"></script>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+            <script src="https://kit.fontawesome.com/3477aceca5.js" crossorigin="anonymous"></script>
         {% endblock %}
     </head>
     <body>
@@ -22,7 +24,7 @@
         <li><a href="{{ path('about') }}">About</a></li>
         <li><a href="{{ path('lucky') }}">Lucky number</a></li>
         <li><a href="{{ path('report') }}">Report</a></li>
-        <li><a href="{{ path('me') }}">Me</a></li>
+        <li><a href="{{ path('me') }}""{{ path('me') }}">Me</a></li>
     </ul>
 </nav>
     </header>
@@ -31,5 +33,10 @@
             {% block body %}{% endblock %}
         </div>
     </div>
+        <footer>
+            <a href="https://github.com/emklemkl/mvcreport">Git-repo emklemkl</a>
+            <a href="https://github.com/dbwebb-se/mvc">Git-repo Kursen</a>
+            <a href="{{ path('quote') }}">Quote</a>
+        </footer>
     </body>
 </html>

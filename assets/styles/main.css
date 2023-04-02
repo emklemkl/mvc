@@ -1,5 +1,9 @@
 body {
     background-color: #afb9d0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
 }
 
 .container {

@@ -1,0 +1,31 @@
+.flex-two-cols {
+    display: flex;
+    flex-direction: row;
+    gap: 1.4rem;
+}
+
+.right-col {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    align-items: center;
+}
+
+.right-col img {
+    max-width: 100%;
+    border:#8c92ac solid 4px;
+    border-radius: 1rem;
+    opacity: 0.9;
+}
+
+.right-col > a {
+    width: 80%;
+    margin-bottom: 1rem;
+}
+
+.left-col {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 120%;
+    }

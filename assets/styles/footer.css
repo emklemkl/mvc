@@ -1,0 +1,18 @@
+
+footer {
+    display: flex;
+    margin-top: auto;
+    min-height: 8em ;
+    background-color:#8096a5;
+    border-top:#0a6aaa solid 4px;
+    align-items: center;
+    max-width: 100%;
+}
+
+footer > a {
+    height: 3em;
+    display: flex;
+    position: relative;
+    background-color:#0a6aaa;
+    align-items: center;
+}

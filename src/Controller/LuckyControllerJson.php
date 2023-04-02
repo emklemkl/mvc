@@ -6,9 +6,11 @@ use DateTime;
 use DateTimeZone;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-class LuckyControllerJson {
+class LuckyControllerJson
+{
     #[Route("/api/lucky/number")]
     public function jsonNumber(): Response
     {
@@ -26,10 +28,9 @@ class LuckyControllerJson {
         return $response;
     }
 
-    #[Route("/api/quote")]
+    #[Route("/api/quote", name: "quote")]
     public function jsonQuote(): Response
     {
-        date_default_timezone_get();
         $dateToday = date("y-m-d");
         $timestamp = time();
         $time = new DateTime();
@@ -38,7 +39,7 @@ class LuckyControllerJson {
         $responseGenerated = $time->format("H:i:s");
         $number = random_int(1, 3);
         $quotes = [
-            '1' => "Life is what happens when you're busy making other plans. -John Lennon",
+            '1' => "Life is what happens when you`re busy making other plans. -John Lennon",
             '2' => "If life were predictable it would cease to be life, and be without flavor. -Eleanor Roosevelt",
             '3' => "The way to get started is to quit talking and begin doing. -Walt Disney"
         ];
@@ -47,8 +48,15 @@ class LuckyControllerJson {
             "date" => $dateToday,
             "timestamp"=> $responseGenerated,
         ];
-        // Prettyprint
-        $response = new JsonResponse($aQuote);
+
+        $response = $this->prettyPrintJsonResponse($aQuote);
+
+        return $response;
+    }
+
+    public function prettyPrintJsonResponse($data) : mixed 
+    {
+        $response = new JsonResponse($data);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );

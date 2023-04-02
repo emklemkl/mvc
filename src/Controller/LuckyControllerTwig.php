@@ -6,23 +6,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 // Gör så att vi kan rendera content till twig templates
 class LuckyControllerTwig extends AbstractController
 {
     #[Route("/lucky", name: "lucky")]
     public function number(): Response
     {
-        $number = random_int(0, 100);
+        $number = random_int(1, 99);
         $data = [
-            'number' => $number
+            'number' => $number,
         ];
         return $this->render('lucky_number.html.twig', $data);
     }
-    
 
     #[Route("/", name: "me")]
-    public function me(): Response
+    public function aboutMe(): Response
     {
         return $this->render('me.html.twig');
     }
@@ -44,5 +42,4 @@ class LuckyControllerTwig extends AbstractController
     {
         return $this->render('report.html.twig');
     }
-
 }
