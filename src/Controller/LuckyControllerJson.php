@@ -54,7 +54,7 @@ class LuckyControllerJson
         return $response;
     }
 
-    public function prettyPrintJsonResponse($data) : mixed 
+    public function prettyPrintJsonResponse($data): mixed
     {
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
