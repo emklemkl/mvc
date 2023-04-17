@@ -1,7 +1,7 @@
 <?php
 namespace App\Card;
 
-class DeckOfCards extends Card
+class CardGraphic extends Card
 {
     
 }

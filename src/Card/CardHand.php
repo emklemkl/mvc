@@ -1,7 +1,7 @@
 <?php
-namespace App\CardHand;
+namespace App\Card;
 
-class CardHand
+class CardHand extends Card
 {
     
 }
