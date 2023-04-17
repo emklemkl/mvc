@@ -29,6 +29,14 @@
 </nav>
     </header>
     <div class="container">
+        <ul> <!--  Comment out this ul-->
+        <br>
+        <li><a href="{{ path('pig_start') }}">pig_start</a></li> <br>
+        <li><a href="{{ path('test_roll_dice') }}">test_roll_dice</a></li> <br>
+        <li><a href="{{ path('pig_init_get') }}">pig_init_get</a></li> <br>
+        <li><a href="{{ path('pig_play') }}">pig_init_play</a></li> <br>
+        {# <li><a href="{{ path('test_dicehand') }}">test_dice_hand</a></li> <br> #}
+        </ul>
         <div class="main-content">
             {% block body %}{% endblock %}
         </div>

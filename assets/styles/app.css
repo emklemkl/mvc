@@ -5,3 +5,8 @@
 @import "main.css";
 @import "footer.css";
 @import "flex-two-cols";
+@import "card";
+
+
+/*Comment out pig-style */
+/* @import "pig-style";  */
