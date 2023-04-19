@@ -2,6 +2,10 @@
 namespace App\Card;
 
 use App\Card\DeckOfCards;
+use Exception;
+
+use function PHPUnit\Framework\throwException;
+
 // use App\Card\Card;
 
 class CardHand
@@ -11,11 +15,17 @@ class CardHand
         $this->deckInHand = $deck;
     }
 
-    function getRandKeyFromHandDeck() {
-        $arr = $this->getDeckInHand();
-        $key = array_rand($this->getDeckInHand());
-        // return $key;
-        return $this->deckInHand;
+    function getRandKeyFromHandDeck($amount = 1) {
+
+        if ($amount > 52 || $amount < 0) {
+            throw new \Exception("Min 0, Max 52");
+        }
+        $key[] = array_rand($this->getDeckInHand(), $amount);
+        $keys = [];
+        foreach ($key as $i) {
+            $keys[] = $i;
+        }
+        return $keys;
     }
 
     function getDeckInHand() {

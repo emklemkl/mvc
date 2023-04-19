@@ -9,23 +9,37 @@ use App\Card\DeckOfCards;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
+
+
 
 class CardController extends AbstractController
 {
     #[Route("/card", name: "card_start")]
-    public function home(): Response
+    public function home(
+        SessionInterface $session,
+        Request $request,
+        ): Response
     {
-        $hand = new CardHand(new DeckOfCards());
-        // var_dump($hand->getDeckInHand());
-        var_dump($hand->getH1());
+        $sessFlag = "Exists!";
+        $sessFlag2 = "Created!";
+        if (!$session->has("hand-deck")){
+            $session->set("hand-deck", new CardHand(new DeckOfCards()));
+            var_dump($sessFlag2);
+        }
+        var_dump($sessFlag);
         return $this->render('card/card.html.twig');
     }
     #[Route("/card/deck", name: "card_deck")]
-    public function deck(): Response
+    public function deck(
+        SessionInterface $session
+    ): Response
     {
-        $deck = new DeckOfCards(); 
+        $handDeck = $session->get("hand-deck"); 
         $data = [
-            "deck" => $deck->getDeck()
+            "deck" => $handDeck->getDeckInHand()
         ];
 
         // Skapa en sida card/deck som visar samtliga kort i kortleken sorterade per färg och värde.
@@ -56,6 +70,13 @@ class CardController extends AbstractController
         // Skapa en sida card/deck/draw som drar ett kort från kortleken
         // och visar upp det. Visa även antalet kort som är kvar i kortleken.
         return $this->render('card/card.html.twig');
+    }
+
+    #[Route("card/clearsession", name: "clear_session")]
+    public function clearSession(SessionInterface $session): Response
+    {
+        $session->clear();
+        return $this->redirectToRoute('card_start');
     }
 
     //Landing page for json-api

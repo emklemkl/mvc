@@ -94,7 +94,7 @@ class DiceGameController extends AbstractController
         SessionInterface $session
     ): Response
     {
-        $numDice = $request->request->get('num_dices');
+        $numDice = $request->get('num_dices');
 
         $hand = new DiceHand();
         for ($i = 1; $i <= $numDice; $i++) {
