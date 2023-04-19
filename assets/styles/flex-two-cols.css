@@ -29,3 +29,15 @@
     flex-direction: column;
     width: 120%;
     }
+
+    /* Used to make the left-col class flex in row */
+.left-col-row {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 120%;
+    justify-content: center;
+    gap: 0.7rem;
+    
+    }

@@ -1,16 +1,12 @@
 {% extends "base.html.twig" %}
 
-{% block title %}About{% endblock %}
+{% block title %}Deck{% endblock %}
 
 {% block body %}
     <h1>Card</h1>
     <div class="flex-two-cols">
-        <div class="left-col">
-            <i class="fa-brands fa-symfony fa-2xl"></i><br>
-            {% for card in cards %}
-                <span class="die">{{ card }}</span>
-            {% endfor %}
-
+        <div class="left-col-row">
+            {{ include("/card/prettyprintcards/red_or_black_cards.html.twig")}}
         </div>
         <div class="right-col">
         <a href="{{ path('card_deck') }}">Deck</a>

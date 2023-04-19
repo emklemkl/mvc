@@ -3,12 +3,10 @@
 namespace App\Controller;
 
 use App\Card\Card;
-use App\Card\CardZone;
+use App\Card\DeckOfCards;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-// use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-// use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class CardControllerJson// extends AbstractController
@@ -17,13 +15,15 @@ class CardControllerJson// extends AbstractController
     #[Route("/api/deck", name: "api_deck", methods: ['GET'])]
     public function jsonDeck(): Response
     {
+        $deck = new DeckOfCards();
         $data = [
-            "hej" => "jsonDeck!"
+            "deck" => $deck->getDeck()
         ];
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
         );
+
         return $response;
     }
     
@@ -35,7 +35,7 @@ class CardControllerJson// extends AbstractController
         ];
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
         );
         return $response;
     }
