@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Draw{% endblock %}
+
+{% block body %}
+    <h1>Draw</h1>
+        <h4>Cards left: {{ cardsleft }}</h4>
+    <div class="flex-two-cols">
+        <div class="left-col-row">
+
+        {% for key, card in drawncards %}
+            {% if key|first =="h" or key|first =="d" %}
+                <span class="card drawn red">{{ card }}</span>
+            {% else %}
+                <span class="card drawn">{{ card }}</span>
+            {% endif %}
+        {% endfor %}
+
+        </div>
+        <div class="right-col">
+            {{ include("/card/nav/deck_nav.html.twig")}}
+        </div>
+    </div>
+{% endblock %}

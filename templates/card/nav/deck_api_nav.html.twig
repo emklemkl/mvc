@@ -1,0 +1,8 @@
+<a href="{{ path('api_deck') }}">Deck (sorted)</a>
+<form class="draw-form" method="post">
+        <input class="draw-form-button" type="submit" value="Shuffle"
+                onClick="this.form.action='{{ path('api_deck_shuffle_post') }}';this.form.method='post';">
+        <input class="draw-form-button" type="submit" value="Draw"
+                onClick="this.form.action='{{ path('api_deck_draw') }}';this.form.method='post';">
+        <input type="number" name="cardsToDraw" value=1 min=1>
+</form>

@@ -8,12 +8,10 @@
         <div class="left-col">
             <i class="fa-brands fa-symfony fa-2xl"></i><br>
 
-
         </div>
         <div class="right-col">
-        <a href="{{ path('card_deck') }}">Deck</a>
-        <a href="{{ path('deck_shuffle') }}">Shuffle</a>
-        <a href="{{ path('card_draw') }}">Draw</a>
+{{ include("/card/nav/deck_nav.html.twig")}}
+
         </div>
     </div>
 {% endblock %}

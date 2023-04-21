@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Dice;
 
 use App\Dice\Dice;
@@ -6,7 +7,7 @@ use App\Dice\Dice;
 class DiceHand
 {
     private $hand = [];
-    public function add(Dice $die): void 
+    public function add(Dice $die): void
     {
         $this->hand[] = $die;
     }

@@ -11,9 +11,7 @@
 
         </div>
         <div class="right-col">
-        <a href="{{ path('quote') }}">Quote</a>
-        <a href="{{ path('api_deck') }}">Api deck</a>
-        <a href="{{ path('api_deck_draw') }}">Api Draw</a>
+            {{ include("/card/nav/deck_api_nav.html.twig")}}
         </div>
     </div>
 {% endblock %}

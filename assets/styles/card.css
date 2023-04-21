@@ -13,3 +13,7 @@
 .red {
     color: rgb(217, 18, 18);
 }
+
+.drawn {
+    margin-right: -1.5rem;
+}

@@ -3,73 +3,91 @@
 namespace App\Controller;
 
 use App\Card\CardHand;
-use App\Dice\Card;
-use App\Dice\CardGraphic;
 use App\Card\DeckOfCards;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Exception as Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
-
-
 
 class CardController extends AbstractController
 {
     #[Route("/card", name: "card_start")]
     public function home(
         SessionInterface $session,
-        Request $request,
-        ): Response
-    {
-        $sessFlag = "Exists!";
-        $sessFlag2 = "Created!";
-        if (!$session->has("hand-deck")){
-            $session->set("hand-deck", new CardHand(new DeckOfCards()));
-            var_dump($sessFlag2);
+    ): Response {
+        if (!$session->has("hand")) {
+            $session->set("hand", new CardHand(new DeckOfCards()));
         }
-        var_dump($sessFlag);
         return $this->render('card/card.html.twig');
     }
+
     #[Route("/card/deck", name: "card_deck")]
     public function deck(
         SessionInterface $session
-    ): Response
-    {
-        $handDeck = $session->get("hand-deck"); 
+    ): Response {
+        $hand = $session->get("hand");
         $data = [
-            "deck" => $handDeck->getDeckInHand()
+            "deck" => $hand->getDeckInHandValuesGraphInOrder()
         ];
-
-        // Skapa en sida card/deck som visar samtliga kort i kortleken sorterade per färg och värde.
         return $this->render('card/deck.html.twig', $data);
     }
+
     #[Route("/card/deck/shuffle", name: "deck_shuffle")]
-    public function shuffleDeck(): Response
-    {
-        // Skapa en sida card/deck/shuffle som visar 
-        // samtliga kort i kortleken när den har blandats.
-        return $this->render('card/card.html.twig');
+    public function shuffleDeck(
+        SessionInterface $session
+    ): Response {
+        $hand = $session->get("hand");
+        $hand->setDeckInHand($hand->shuffleHandDeck());
+        $session->set("hand", $hand);
+        $data = [
+            "deck" => $hand->getDeckInHandValuesGraph()
+        ];
+        return $this->render('card/shuffled.html.twig', $data);
     }
 
-    #[Route("/card/deck/draw", name: "card_draw")]
-    public function drawCard(): Response
-    {
-        // Skapa en sida card/deck/draw som drar ett kort från kortleken
-        // och visar upp det. Visa även antalet kort som är kvar i kortleken.
-        return $this->render('card/card.html.twig');
+    #[Route("/card/deck/draw", name: "card_draw", methods: ['GET'])]
+    public function drawCard(
+        Request $request,
+        SessionInterface $session
+    ): Response {
+        $cardsToDraw = $request->get('cardsToDraw');
+        $hand = $session->get("hand");
+        if ($cardsToDraw) {
+            $drawnCards = $hand->drawCards($cardsToDraw);
+        } else {
+            $drawnCards = $hand->drawCards();
+        }
+        $drawnCardsGraphics = new DeckOfCards($drawnCards);
+        $data = [
+            "deck" => $hand->getDeckInHandValuesGraph(),
+            "cardsleft" =>  $hand->getDeckInHand()->countCardsInHandDeck(),
+            "drawncards" => $drawnCardsGraphics->getDeckWithGraphic()
+        ];
+        $session->set("hand", $hand);
+        return $this->render('card/draw.html.twig', $data);
     }
 
     #[Route("card/deck/draw/{num<\d+>}", name: "card_draws")]
-    public function drawCards(Int $num): Response
-    {
+    public function drawCards(
+        Int $num,
+        SessionInterface $session
+    ): Response {
+        // $request->get('drawnCards');
         if ($num > 52) {
-            throw new \Exception("Can not draw more than 52 cards!");
+            throw new Exception("Can not draw more than 52 cards!");
         }
-        // Skapa en sida card/deck/draw som drar ett kort från kortleken
-        // och visar upp det. Visa även antalet kort som är kvar i kortleken.
-        return $this->render('card/card.html.twig');
+        $hand = $session->get("hand");
+        $drawnCards = $hand->drawCards($num);
+        $drawnCardsGraphics = new DeckOfCards($drawnCards);
+        $data = [
+            "deck" => $hand->getDeckInHandValuesGraph(),
+            "cardsleft" =>  $hand->getDeckInHand()->countCardsInHandDeck(),
+            "drawncards" => $drawnCardsGraphics->getDeckWithGraphic()
+        ];
+        $session->set("hand", $hand);
+        return $this->render('card/draw.html.twig', $data);
     }
 
     #[Route("card/clearsession", name: "clear_session")]
@@ -81,8 +99,11 @@ class CardController extends AbstractController
 
     //Landing page for json-api
     #[Route("/api", name: "api")]
-    public function jsonNumber(): Response
+    public function jsonNumber(SessionInterface $session): Response
     {
+        if (!$session->has("hand")) {
+            $session->set("hand", new CardHand(new DeckOfCards()));
+        }
         return $this->render("card/json_home.html.twig");
     }
 }
