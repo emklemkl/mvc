@@ -20,15 +20,26 @@ class DeckOfCards extends CardGraphic
         }
     }
 
+    /**
+     * Return the deck in its current state
+     */
     public function getDeck()
     {
         return $this->deck;
     }
-    public function setDeck($newDeck)
+
+    /**
+     * Update the state of deck by replacing the deck with a new modified one
+     */
+    public function setDeck(array $newDeck)
     {
         $this->deck = $newDeck;
     }
 
+    /**
+     * Returns an associative array with
+     * all the cards in deck with their matched graphic.
+     */
     public function getDeckWithGraphic()
     {
         $deck = $this->getDeck();
@@ -42,8 +53,12 @@ class DeckOfCards extends CardGraphic
         return $graphicDeck;
     }
 
-    // This does not sort the actual deck, it just returns them in order
-    // based on the order in the associative array $deckGraphics inherited from CardGraphics
+    /**
+     * Almost the same as getDeckWithGraphic()
+     * This does not sort the actual deck, it just returns them in order
+     * based on the order in the associative array $deckGraphics inherited from CardGraphics
+     */
+
     public function getDeckWithGraphicsInOrder()
     {
         $deck = $this->getDeck();
@@ -57,12 +72,17 @@ class DeckOfCards extends CardGraphic
         return $graphicDeck;
     }
 
-    // Counts and return the totalt amount of remaining cards in the hand deck
-    public function countCardsInHandDeck(): int
+    /**
+     * Counts and return the totalt amount of remaining cards in the hand deck
+     */
+    public function countCardsInDeck(): int
     {
         return count($this->deck);
     }
 
+    /**
+     * Remove cards/values from deck if exists
+     */
     public function removeCardsFromDeck(array $removeValue)
     {
         foreach ($removeValue as $remove) {
@@ -72,7 +92,11 @@ class DeckOfCards extends CardGraphic
         }
     }
 
-    public function returnRandomCards($quantity = 1): array
+    /**
+     * Gets and returns a number of random card/values.
+     * Default return 1 card
+     */
+    public function returnRandomCards(int $quantity = 1): array
     {
         $randCards = [];
         if (!$this->deck) {
@@ -81,6 +105,7 @@ class DeckOfCards extends CardGraphic
         if (count($this->deck) < $quantity) {
             throw new \Exception("Can't remove $quantity cards. Only ".count($this->deck)." cards left!");
         }
+        // Must return an array so the if statement below is just error handling
         if ($quantity === 1) {
             $randKeys[] = array_rand($this->deck, $quantity);
         } else {

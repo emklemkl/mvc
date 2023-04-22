@@ -13,7 +13,7 @@ Reflektera kort över den kodbas, koden, strukturen som användes till uppgiften
 Med tanke på artikeln “PHP The Right Way”, vilka delar in den finner du extra intressanta och värdefulla? 
 Är det några särskilda områden som du känner att du vill veta mer om? Lyft fram några delar av artikeln som du känner mer värdefulla. #}
 
-Den enda direkta tidigare erfarenheten jag har med objektorientering är från OOPython-kursen. Spontant känns det ju som principen med 
+<p>Den enda direkta tidigare erfarenheten jag har med objektorientering är från OOPython-kursen. Spontant känns det ju som principen med 
 OOp är densamma i många olika språk. Simpelt och generellt beskrivet är det ett sätt att skapa objekt som håller sina egna 
 attribut och funktioner. Vilket låter som en logisk modell då människan har ett objektorienterad tankesätt, alla saker har sitt 
 användningsområde. Generellt tycker jag PHPs sätt att skapa klasser och objekt påminner mycket om hur man gör i Python. Exempelvis hur man jobbar med 
@@ -43,7 +43,38 @@ ju djupare man behöver dyka i PHP, men vid första anblick känns den lite oins
 har bara gjort lite basic anpassning.</p>
 
     <h2 id="kmom02">Kmom02</h2>
-    <p>Kmom1</p>
+    {# Förklara kort de objektorienterade konstruktionerna arv, komposition, interface och trait och hur de används i PHP.
+    Berätta om din implementation från uppgiften. Hur löste du uppgiften, är du nöjd/missnöjd, vilken förbättringspotential ser du i din koden och dina klasser?
+    
+    Berätta hur det kändes att modellera ett kortspel med flödesdiagram och psuedokod.
+    Var det något som du tror stödjer dig i din problemlösning och tankearbete för att strukturera koden kring en applikation?
+
+    Vilken är din TIL för detta kmom? #}
+    <p>Arv är ett sätt att strukturera sin kod mer eller mindre. Det innebär att man enklare kan strukturera sin kod i relevanta 'hierarkier'. Som 
+    exempel kan vi ta klassikern att (nästan) alla bilar har har attributen en motor och fyra hjul samt metoden gasa(), men färgen kan variera från bil till bil. Då kan vi göra en 
+    Bil-klass som har dem relevanta attributen och metoderna för en bils grundliga funktioner. Sedan kan en annan subklass ärva från Bil och på så sätt få
+    med sig basmetoderna från Bil. Då kan subklassen fokusera på att specialisera bilen åt något annat håll, typ ändra färg. </p>
+    <p>Komposition är en typ av livlineförhållande. Om klassen X som håller/använder sig av Y slutar existera så kommer även klassen Y att försvinna. Man kan  
+    jämföra det med att om ett företag går i konkurs/upphör så kommer dem anställdas 'Anställning' försvinna då det i detta fall krävs ett Företag för att erbjuda ett anställningskontrakt.</p>
+    <p>När man läser om Interface påminner beskrivningen om hur abstrakta klassmetoder fungerade i Python. Det är ett sätt att tvinga t.e.x en subklass att uppfylla dem 
+    krav och funktionerna en klass förväntas ha, beroende på vad det är för klass. Är det ett kortspels-interface så förväntas åtminstonde en deal och shuffle-metod. På så 
+    sätt kan kod blir med återanvändbar då jag rent teoretiskt skulle kunna stoppa in vilken kortlek som helst i en kortklass som lyder under ett kortspels-Interface.</p>
+    <p>Ett Trait är en samling återanvändbar kod som kan användas i olika klasser. Det är ett alternativ till Arv, i Php kan man inte ärva från flera Föräldraklasser. Då 
+    kan trait vara ett alternativ för att lyckas dela kod mellan olika klasser istället. När en klass använder ett trait så kan klassen använda traitens metoder. En tydlig skillnad 
+    mellan Trait och Klass, enligt <a class="a-reset" href="https://www.php.net/manual/en/language.oop5.traits.php">Php manualen om Traits</a>, är att ett Trait inte kan instansierias fristående, så som 
+    en klass kan.</p>
+    <p>Jag är ganska nöjd med min implementation och tycker jag har fått mycket gjort med ganska lite kod. Jag valde dock att inte använda mig av Cards-klassen utan jag gjorde 
+    bara en CardGraphics-klass. Anledningen till det är att jag valde att utgå ifrån att en ny kortlek är sorterad och i rätt antal från början. Jag använde mig av ChatGPT för att 
+    snabbt göra två arrayer (en value och en key,value) som skulle motsvara kortleken och dess grafik och på så sätt tog det mig ingen tid att påbörja det upplägget. Om jag skulle 
+    skrivit båda arrayerna manuellt hade jag nog valt ett annat sätt att skapa kortleken, med tex loopar. Men en vanlig kortlek har alltid 52 kort så jag behövde inte ta hänsyn till 
+    några eventuella förändringar på den fronten och det är alltid kul att nyttja sig av ny teknik (Obs, jag har INTE använt ChatGPT för att skriva någon kod utan endast för att underlätta 
+    formateringen/framställningen av kort-arrayerna.). <br>
+    En sak som skulle kunnat vara bättre är att jag ibland har/hade lite dubblettmetoder som gör samma sak med kortleken i handen beroende på vart du använder metoden(i CardHand eller 
+    i DeckOfCards) och det kunde vara vilseledande ibland. Jag har dock rensat bort (nästan) alla onödiga dubblettmetoder och försökt hålla alla metoder som hämtar eller sätter information 
+    om DeckOfCards i DeckOfCards samt alla manipulerande metoder i CardHand för att få en lite mer logisk struktur</p>
+    <p>Jag missade helt detaljen om att man skulle göra ett UML-diagram och såg detta när jag dubbelkollade kraven innan inlämning. Vilket är lite synd för min del då jag i tidigare kurser 
+    märkt att jag skriver lite mer strukturerad kod när jag har en mall att utgå ifrån. Mitt TIL för detta kmom är det jag lärt mig om Trait och Interface. Jag har dock inte nyttjat 
+    någon av dem mekanismerna i min kod men jag vill prova på dem längre fram.</p>
     <h2 id="kmom03">Kmom03</h2>
     <p>Kmom1</p>
     <h2 id="kmom04">Kmom04</h2>

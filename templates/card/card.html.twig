@@ -3,11 +3,20 @@
 {% block title %}Card{% endblock %}
 
 {% block body %}
-    <h1>Card</h1>
+    <h2>Card</h2>
     <div class="flex-two-cols">
         <div class="left-col">
-            <i class="fa-brands fa-symfony fa-2xl"></i><br>
-
+        <p>Just nu består 'kortspelet' av 3 klasser. CardHand är den 
+        klass som spelaren 'använder' för att manipulera kortleken som ligger 
+        i den aktuella CardHand-instansen. CardHand och DeckOfCards har en 
+        kompositionsrelation där DeckOfCards injekteras i CardHand-objektet(vid instansiering). DeckOfCards är 
+        dock kapabel att existera på sin egen hand utan CardHand för att underlätta utskrifter vid vissa moment. 
+        <br> <br> DeckOfCards är själva kortleken och den innehåller metoder för att hämta information om sig själv($this), 
+        exempelvis 'countCardsInDeck'. DeckOfCards innehåller en hel sorterad kortlek(array) från början. Korten ärver sin 
+        grafik från CardGraphics-klassen vid utskrift. Manipulation av kortleken sker i regel genom CardHand med hjälp av funktionerna 
+        is DeckOfCards.
+        </p> 
+            <img class="uml" src="{{ asset('img/mvc-kmom-uml.png') }}" alt="Uml diagram of Card related classes">
         </div>
         <div class="right-col">
 {{ include("/card/nav/deck_nav.html.twig")}}

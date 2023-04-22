@@ -33,7 +33,7 @@ class CardControllerJson extends AbstractController
         SessionInterface $session
     ): Response {
         $hand = $session->get("hand");
-        $hand->setDeckInHand($hand->shuffleHandDeck());
+        $hand->shuffleHandDeck();
         $session->set("hand", $hand);
         return $this->redirectToRoute("api_deck_shuffle");
     }
@@ -59,7 +59,7 @@ class CardControllerJson extends AbstractController
 
         $hand = $session->get("hand");
         $drawnCards = ((int)$cardsToDraw <= 1) ? $hand->drawCards() : $hand->drawCards($cardsToDraw);
-        $cardsLeft = $hand->getDeckInHand()->countCardsInHandDeck();
+        $cardsLeft = $hand->getDeckInHand()->countCardsInDeck();
         $data = [
             "drawncards" => $drawnCards,
             "cardsleft" => $cardsLeft

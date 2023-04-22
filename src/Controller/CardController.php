@@ -39,7 +39,8 @@ class CardController extends AbstractController
         SessionInterface $session
     ): Response {
         $hand = $session->get("hand");
-        $hand->setDeckInHand($hand->shuffleHandDeck());
+        // $hand->setDeckInHand($hand->shuffleHandDeck());
+        $hand->shuffleHandDeck();
         $session->set("hand", $hand);
         $data = [
             "deck" => $hand->getDeckInHandValuesGraph()
@@ -62,7 +63,7 @@ class CardController extends AbstractController
         $drawnCardsGraphics = new DeckOfCards($drawnCards);
         $data = [
             "deck" => $hand->getDeckInHandValuesGraph(),
-            "cardsleft" =>  $hand->getDeckInHand()->countCardsInHandDeck(),
+            "cardsleft" =>  $hand->getDeckInHand()->countCardsInDeck(),
             "drawncards" => $drawnCardsGraphics->getDeckWithGraphic()
         ];
         $session->set("hand", $hand);
@@ -83,7 +84,7 @@ class CardController extends AbstractController
         $drawnCardsGraphics = new DeckOfCards($drawnCards);
         $data = [
             "deck" => $hand->getDeckInHandValuesGraph(),
-            "cardsleft" =>  $hand->getDeckInHand()->countCardsInHandDeck(),
+            "cardsleft" =>  $hand->getDeckInHand()->countCardsInDeck(),
             "drawncards" => $drawnCardsGraphics->getDeckWithGraphic()
         ];
         $session->set("hand", $hand);
