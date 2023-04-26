@@ -3,12 +3,14 @@
 namespace App\Card;
 
 use App\Card\DeckOfCards;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 // use App\Card\Card;
 
 class CardHand
 {
     protected $deckInHand = null;
+    protected $drawnCards = [];
     public function __construct(DeckOfCards $deck)
     {
         $this->deckInHand = $deck;
@@ -20,7 +22,7 @@ class CardHand
     public function getRandKeyFromHandDeck($amount = 1)
     {
         if ($amount > 52 || $amount < 0) {
-            throw new \Exception("Min 0, Max 52");
+            throw new Exception("Min 0, Max 52");
         }
         $key[] = array_rand($this->getDeckInHandValues(), $amount);
         $keys = [];
@@ -80,7 +82,7 @@ class CardHand
      * This is not a sorted deck, it just prints them in order
      * based on the order in the associative array $deckGraphics from CardGraphics
      */
-    public function getDeckInHandValuesGraphInOrder()
+    public function getDeckInHandValuesGraphInOrder() : array
     {
         return  $this->deckInHand->getDeckWithGraphicsInOrder();
     }
@@ -88,10 +90,74 @@ class CardHand
     /**
      * Calls on functions to  Draw and remove  X random cards. Defualt argument is 1
      */
-    public function drawCards($quantity = 1)
+    public function drawCards($quantity = 1) : array
     {
         $cards = $this->deckInHand->returnRandomCards($quantity);
+        foreach ($cards as $card) {
+            $this->drawnCards[] = $card;
+        }
         $this->deckInHand->removeCardsFromDeck($cards);
         return $cards;
     }
-}
+
+    /**
+     * Returns the CardHand instance's all drawn cards as an array
+     */
+    public function getAllDrawnCards() : array
+    {
+        return $this->drawnCards;
+    }
+
+    public function printAllDrawnCards() {
+        $graphicDeck = [];
+        $graphics = $this->deckInHand->getCardGraphics();
+        foreach ($this->drawnCards as $key) {
+                $graphicDeck[$key] = $graphics[$key];
+        }
+        return $graphicDeck;
+    }
+
+    /**
+     * Returns a string with comma separeted values representing the current deck state
+     */
+    public function getDeckAsString() : string
+    {
+        $cardsAsString = "";
+        $deck = $this->getDeckInHandValues();
+        foreach ($deck as $card)
+            {  
+            $cardsAsString .= "$card,";
+        }
+        $cardsAsString = rtrim($cardsAsString,",");
+        return $cardsAsString;
+    }
+
+    /**
+     * Returns an array with the deck sum. 
+     * The first element is with ace of X == 1
+     * The second element is with ace of X == 14
+     */
+    public function getDeckSum()  :array {
+        $sumLow = 0;
+        $sumHigh = 0;
+        foreach ($this->getDeckInHandValues() as $val){
+            $intValue = (int)substr($val, 1);
+            $sumLow += $intValue;
+            $sumHigh += $intValue === 1 ? 14 : $intValue;
+        }
+        return [$sumLow, $sumHigh];
+    }
+
+    /**
+     * Checks if the current deck value is above 21.
+     * returns True if above else false
+     */
+    public function isOver21() {
+        $isOver21 = false;
+        $deckValues = $this->getDeckSum();
+        if ($deckValues[0] > 21 && $deckValues[1] > 21) {
+            $isOver21 = true;
+        }
+        return $isOver21;
+    }
+} 

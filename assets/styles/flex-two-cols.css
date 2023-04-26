@@ -40,10 +40,3 @@
     justify-content: center;
     gap: 0.7rem;
     }
-
-.uml {
-    opacity: 0.8;
-    border: solid #0a6aaa 2px;
-    padding: 0.2rem;
-    border-radius: 1rem;
-}

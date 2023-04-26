@@ -12,7 +12,7 @@ class CardGraphic
     ];
 
     // Return the deckGraphics array
-    protected function getCardGraphics(): array
+    public function getCardGraphics(): array
     {
         return $this->deckGraphics;
     }

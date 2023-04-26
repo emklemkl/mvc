@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Doc{% endblock %}
+
+{% block body %}
+    <h2>Doc</h2>
+    <div class="flex-two-cols">
+        <div class="left-col">
+        <a href="{{ asset('img/flow21.png') }}">
+        <img class="flowchart" src="{{ asset('img/flow21.png') }}" alt="Uml diagram of Card related classes"></a> 
+        </div>
+        <div class="right-col">
+{{ include("/game/nav/game_nav.html.twig")}}
+
+        </div>
+    </div>
+{% endblock %}
