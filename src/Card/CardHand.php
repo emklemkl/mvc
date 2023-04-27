@@ -89,6 +89,7 @@ class CardHand
 
     /**
      * Calls on functions to  Draw and remove  X random cards. Defualt argument is 1
+     * Also saves the drawn cards to $drawnCards[]
      */
     public function drawCards($quantity = 1) : array
     {
@@ -148,13 +149,24 @@ class CardHand
         return [$sumLow, $sumHigh];
     }
 
+    public function getDrawnSum()  :array {
+        $sumLow = 0;
+        $sumHigh = 0;
+        foreach ($this->getAllDrawnCards() as $val){
+            $intValue = (int)substr($val, 1);
+            $sumLow += $intValue;
+            $sumHigh += $intValue === 1 ? 14 : $intValue;
+        }
+        return [$sumLow, $sumHigh];
+    }
+
     /**
      * Checks if the current deck value is above 21.
      * returns True if above else false
      */
     public function isOver21() {
         $isOver21 = false;
-        $deckValues = $this->getDeckSum();
+        $deckValues = $this->getDrawnSum();
         if ($deckValues[0] > 21 && $deckValues[1] > 21) {
             $isOver21 = true;
         }

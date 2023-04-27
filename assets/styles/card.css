@@ -12,8 +12,16 @@
 
 .red {
     color: rgb(217, 18, 18);
+    transform: rotate(4deg) !important;
 }
 
 .drawn {
     margin-right: -1.5rem;
+    transform: rotate(-2deg);
+}
+
+.drawn:nth-child(3n) {
+    margin-right: -1.5rem;
+    margin-bottom: 1rem;
+    transform: rotate(1deg) !important;
 }

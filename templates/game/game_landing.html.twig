@@ -4,9 +4,11 @@
 
 {% block body %}
     <h2>Kortspel 21</h2>
+            {{ include("/game/flash/flash.html.twig")}} 
     <div class="flex-two-cols">
         <div class="left-col-row">
-            {{ include("/card/prettyprintcards/red_or_black_cards.html.twig")}}
+            {{ include("/card/prettyprintcards/red_or_black_cards.html.twig")}} 
+            <br>
         <p>
         Spelet går ut på att med två eller flera kort försöka uppnå det sammanlagda värdet 21, 
         eller komma så nära som möjligt utan att överskrida 21. Essen är värda valfritt 1 eller 14, kungarna 13, damerna 12, knektarna 11.

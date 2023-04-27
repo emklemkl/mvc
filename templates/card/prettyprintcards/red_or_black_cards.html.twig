@@ -1,7 +1,7 @@
 {% for key, card in deck %}
     {% if key|first =="h" or key|first =="d" %}
-        <span class="card red">{{ card }}</span>
+        <span class="card red drawn">{{ card }}</span>
     {% else %}
-        <span class="card">{{ card }}</span>
+        <span class="card drawn">{{ card }}</span>
     {% endif %}
 {% endfor %}

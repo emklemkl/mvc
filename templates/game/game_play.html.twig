@@ -4,8 +4,13 @@
 
 {% block body %}
     <h2>Gameplay</h2>
+            {{ include("/game/flash/flash.html.twig")}} <br>
+        <h5>Lowest: {{total[0]}} </h5>
+        <h5>Highest: {{total[1]}} </h5>
     <div class="flex-two-cols">
-        <div class="left-col">
+        <div class="left-col-row ">
+
+            {{ include("/card/prettyprintcards/red_or_black_cards.html.twig")}}
         </div>
         <div class="right-col">
 {{ include("/game/nav/play_nav.html.twig")}}
