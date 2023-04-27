@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}21 Home{% endblock %}
+
+{% block body %}
+    <h2>Result</h2>
+            {{ include("/game/flash/flash.html.twig")}} 
+    <div class="flex-two-cols">
+        <div class="left-col-row">
+            <h4>Player score L/H: {{playertotal[0]}}/{{playertotal[1]}}</h4>
+            <div class="scorebox">
+            {{ include("/card/prettyprintcards/red_or_black_cards_finish.html.twig")}} 
+            </div>
+            
+            <h4>Bank score L/H: {{banktotal[0]}}/{{banktotal[1]}} </h4>
+            <div class="scorebox">
+            {{ include("/card/prettyprintcards/red_or_black_cards_finish2.html.twig")}} 
+            </div>
+        </div>
+        <div class="right-col">
+            {{ include("/game/nav/game_nav.html.twig")}}
+
+        </div>
+    </div>
+{% endblock %}

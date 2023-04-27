@@ -104,12 +104,12 @@ class CardHand
     /**
      * Returns the CardHand instance's all drawn cards as an array
      */
-    public function getAllDrawnCards() : array
+    public function getDrawnCards() : array
     {
         return $this->drawnCards;
     }
 
-    public function printAllDrawnCards() {
+    public function printDrawnCards() {
         $graphicDeck = [];
         $graphics = $this->deckInHand->getCardGraphics();
         foreach ($this->drawnCards as $key) {
@@ -152,7 +152,7 @@ class CardHand
     public function getDrawnSum()  :array {
         $sumLow = 0;
         $sumHigh = 0;
-        foreach ($this->getAllDrawnCards() as $val){
+        foreach ($this->getDrawnCards() as $val){
             $intValue = (int)substr($val, 1);
             $sumLow += $intValue;
             $sumHigh += $intValue === 1 ? 14 : $intValue;

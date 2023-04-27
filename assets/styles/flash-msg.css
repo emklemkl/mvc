@@ -1,10 +1,23 @@
 .flash-notice {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+
+    width: 60%;
+    left: 20%;
     padding: 0.5em;
     color: #004085;
+
+    border: 1px solid #000985;;
+    font-size: 1.2rem;
     background-color: #cce5ff;
-    border-color: #b8daff;
+
 }
 .flash-notice:before {
+    padding: 0.5em;
+    font-size: 1.8rem;
+    color: #000985;
     content: "ⓘ";
 }
 

@@ -15,31 +15,27 @@ class GameController extends AbstractController
 {
     #[Route("/game", name: "game_landing")]
     public function home(
-        SessionInterface $session,
     ): Response {
         $welcomeCards = new CardHand(new DeckOfCards());
         $welcomeCards->drawCards(4);
 
         $data = [    
-            "deck"=>$welcomeCards->printAllDrawnCards(),
+            "deck"=>$welcomeCards->printDrawnCards(),
         ];
         return $this->render('game/game_landing.html.twig', $data);
-
     }
 
     #[Route("/game/play", name: "game_play")]
     public function play(
         SessionInterface $session,
     ): Response {
+        // Initiate session vars
         if (!$session->has("game")) {
             $deck = new DeckOfCards();
             $game = new Game(new CardHand($deck), new CardBank($deck));
             $session->set("game", $game);
         }
         $game = $session->get("game");
-        $game->getDrawnCardsGame();
-
-        var_dump($game->whosTurnIsIt());
         $data = [    
             "deck"=> $game->getDrawnCardsGame(),
             "total"=> $game->getHands()[$game->whosTurnIsIt()]->getDrawnSum()
@@ -53,10 +49,17 @@ class GameController extends AbstractController
         SessionInterface $session,
     ): Response {
         $game = $session->get("game");
-        $game->gameplayCycle();
-        if ($game->isOver21()) {
-            $this->addFlash("warning", "Bust! You crossed the 21 mark :(");
-            return $this->redirectToRoute('game_landing');
+        $isLastPlayerOrOver21 = $game->gameplayCycle();
+        if ($isLastPlayerOrOver21 === "over21") {
+            $this->addFlash("notice", "".$game->currentPlayerName(). " 
+            got over 21. ".$game->currentPlayerName("other")." won!");
+            $game = $session->set("game", $game);
+            return $this->redirectToRoute('game_finished');
+        }
+        if ($isLastPlayerOrOver21) {
+            $this->addFlash("notice", "Bank Finished");
+            $game = $session->set("game", $game);
+            return $this->redirectToRoute('game_finished');
         }
         $game = $session->set("game", $game);
         return $this->redirectToRoute('game_play');
@@ -65,19 +68,33 @@ class GameController extends AbstractController
     #[Route("/game/stand", name: "game_stand")]
     public function stand(
         SessionInterface $session,
-    ): Response {
-        // if (!$session->has("game")) {
-        //     $this->addFlash("warning", "You need to initiate a deck first. Press 'Play'");
-        //     return $this->redirectToRoute('game_landing');
-        // }
+        ): Response {
         $game = $session->get("game");
-        if ($game->isBanksTurn()) {
-            $this->addFlash("warning", "Bank finished its round");
-            return $this->redirectToRoute('game_landing');
-        }
         $game->nextPlayerTurn();
+        $isBanksTurn = $game->isBanksTurn();
         $game = $session->set("game", $game);
+        if ($isBanksTurn) {
+            return $this->redirectToRoute('game_hit');
+        }
         return $this->redirectToRoute('game_play');
+        return $this->render('game/doc.html.twig');
+    }   
+
+    #[Route("/game/finished", name: "game_finished")]
+    public function finished(
+        SessionInterface $session,
+    ): Response {
+        $game = $session->get("game");
+        // var_dump($game->getWinner());
+        $game->getAllDrawnCards();
+        $data = [    
+            "player"=> $game->getAllDrawnCards()[0],
+            "playertotal"=> $game->getHands()[0]->getDrawnSum(),
+            "bank"=> $game->getAllDrawnCards()[1],
+            "banktotal"=> $game->getHands()[1]->getDrawnSum(),
+        ];
+        $session->clear();
+        return $this->render('game/game_finished.html.twig', $data);
     }
 
     #[Route("/game/doc", name: "game_doc")]
