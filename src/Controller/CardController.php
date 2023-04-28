@@ -55,11 +55,7 @@ class CardController extends AbstractController
     ): Response {
         $cardsToDraw = $request->get('cardsToDraw');
         $hand = $session->get("hand");
-        if ($cardsToDraw) {
-            $drawnCards = $hand->drawCards($cardsToDraw);
-        } else {
-            $drawnCards = $hand->drawCards();
-        }
+        $drawnCards = ($cardsToDraw) ? $hand->drawCards($cardsToDraw) : $hand->drawCards();
         $drawnCardsGraphics = new DeckOfCards($drawnCards);
         $data = [
             "deck" => $hand->getDeckInHandValuesGraph(),
