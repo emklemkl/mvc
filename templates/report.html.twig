@@ -4,7 +4,14 @@
 
 {% block body %}
     <h1>Report</h1>
-    <h2 id="kmom01">Kmom01</h2>
+    <a href="#kmom01">kmom01</a>
+    <a href="#kmom02">kmom02</a>
+    <a href="#kmom03">kmom03</a>
+    <a href="#kmom04">kmom04</a>
+    <a href="#kmom05">kmom05</a>
+    <a href="#kmom06">kmom06</a>
+    <a  href="#kmom10">kmom10</a>
+    <h2 style="margin-top:1.4rem;" id="kmom01">Kmom01</h2>
     {# <p>Berätta kort om dina förkunskaper och tidigare erfarenheter kring objektorientering.
 Berätta kort om PHPs modell för klasser och objekt. Vilka är de grunder man behöver 
 veta/förstå för att kunna komma igång och skapa sina första klasser?
@@ -76,14 +83,45 @@ har bara gjort lite basic anpassning.</p>
     märkt att jag skriver lite mer strukturerad kod när jag har en mall att utgå ifrån. Mitt TIL för detta kmom är det jag lärt mig om Trait och Interface. Jag har dock inte nyttjat 
     någon av dem mekanismerna i min kod men jag vill prova på dem längre fram.</p>
     <h2 id="kmom03">Kmom03</h2>
-    <p>Kmom1</p>
+    {# Berätta hur det kändes att modellera ett kortspel med flödesdiagram och psuedokod. Var det något som du tror stödjer dig i 
+    din problemlösning och tankearbete för att strukturera koden kring en applikation?
+    Berätta om din implementation från uppgiften. Hur löste du uppgiften, är du nöjd/missnöjd, 
+    vilken förbättringspotential ser du i din koden, dina klasser och applikationen som helhet?
+    Vilken är din känsla för att koda i ett ramverk som Symfony, så här långt in i kursen?
+    Vilken är din TIL för detta kmom? #}
+    <p>
+    Jag gjorde först ett flödesdiagram med flödeslogiken jag ville ha i spelet. Jag har inte tittat så mycket på flödesdiagramet då jag gjorde en ganska stark mental 
+    notering på hur jag ville jobba under tiden jag gjorde diagramet. Så det var klart ett hjälpmedel, men främst i början för att få igång en vettig och målinriktad start. Jag 
+    skrev lite pseudokod innan jag började skriva men jag valde ganska snabbt att skriva den i ett listformat istället då jag var osäker på vad jag behövde för funktioner och struktur, 
+    sedan fyllde jag på den lite efter hand. 
+    Då kändes det mer hjälpsamt att ha en lista att gå efter som nämner dem flesta grundstenar. En lärdom jag fått av att försöka skriva pseudokod är att jag upplever det som svårt 
+    att börja visualisera mig vad jag kommer/inte kommer att behöva i ett sådant tidigt stadie. Det mesta brukar komma när jag fått ihop en grundstruktur, i detta fall avser jag 
+    grundstruktur som exempelvis routes och en startsida/slutsida. <br> <br>
+    Innan jag började göra någon riktig kodning så gjorde jag alla routes jag kunde tänka mig, framförallt en 'lekroute' som jag använde mycket i början för att prova grundläggande funktioner. 
+    Jag implementerade alla klasserna och såg till att jag kunde göra grundläggande saker (dra kort osv, det som gjordes i kmom02). Koden jag skrev i kmom02 har varit smidig att 
+    jobba med och jag tycker att jag gjorde ett bra jobb i kmom02 med att förbereda klasserna för kortspelet. <br><br>
+    Den grundläggande strukturen i kortspelet är att Game-klassen hanterar spelets flöde, såsom att hålla kolla på vems tur det är, hålla antal spelare, låta spelaren dra ett kort eller 
+    inte och utse en vinnare mm. CardHand och CardBank(CB ärver från CH) representerar en spelare och en bank och deras jobb är att kunna manipulera kortleken, hålla sina poäng 
+    samt meddela Game om dem blivit tjocka eller inte. Game, CardHand och CardBank har en kompositionsrelation där banken alltid är sista spelaren. Game får(inject) spelartyp, banktyp och en int 
+    som talar om hur många spelare som ska vara med och därefter skapar dem (jag har förberett lite grann för att kunna lägga till fler spelare men just nu stödjer spelet bara 1
+    bank och 1 spelare). CardGraphics används i kombination med en 'prettyprint-twig-fil' för att kunna skriva ut lite finare kort. Klassen används även som en referens vid sortering 
+    av DeckOfCards då den grafiska representationen är sorterad. <br>
+    En tydlig förbättringsåtgärd jag kunnat göra är att flytta ansvaret från Game till CardBank när det gäller att kolla om CardBank är färdig med sin tur. Just nu ligger ansvaret 
+    för en stor del av CardBanks tur i gameplayCycle() i Game. Det är lite missvisande då det hade varit bättre om CardBank själv skött den biten och returnat data till Game när 
+    dess gameplay-cykel är klar. Det är förvisso ingen svår fix men just nu prioriterar jag att lämna in uppgiften. <br>
+    Mina åsikter om Symfony är blandade. Jag tycker det är ett otroligt tungjobbat ramverk som man lätt går vilse i. Men samtidigt verkar man ha kontroll över väldigt mycket 
+    smådetaljer. Den största nackdelen är nog dokumentationen, den lämnar mycket att önska och har sällan ett relevant svar på det man söker. Så enkelt sammanfattat, Symfony är 
+    inte min 'cup of tea' men samtidigt gillar jag att gå utanför min comfort-zone så jag uppskattar upplevelsen. <br> <br>
+    Min TIL är att jag tycker det är svårt att planera innan jag börjar, det är något jag behöver träna på.
+
+    </p>
     <h2 id="kmom04">Kmom04</h2>
     <p>Kmom1</p>
     <h2 id="kmom05">Kmom05</h2>
     <p>Kmom1</p>
     <h2 id="kmom06">Kmom06</h2>
     <p>Kmom1</p>
-    <h2 id="kmom10">Kmom06</h2>
+    <h2 id="kmom10">Kmom10</h2>
     <p>Kmom1</p>
 
 {% endblock %}

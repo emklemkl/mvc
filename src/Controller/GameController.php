@@ -88,7 +88,7 @@ class GameController extends AbstractController
             "bank"=> $game->getAllDrawnCards()[1],
             "banktotal"=> $game->getHands()[1]->getDrawnSum(),
         ];
-        $session->clear();
+        // $session->clear();
         return $this->render('game/game_finished.html.twig', $data);
     }
 

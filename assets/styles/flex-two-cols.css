@@ -30,6 +30,13 @@
     width: 120%;
     }
 
+.left-col-to-left {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    width: 120%;
+    }
+
     /* Used to make the left-col class flex in row */
 .left-col-row {
     align-items: center;

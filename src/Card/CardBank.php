@@ -12,6 +12,4 @@ class CardBank extends CardHand
     {
         $this->deckInHand = $deck;
     }
-
-
 }

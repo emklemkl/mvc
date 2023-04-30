@@ -4,13 +4,46 @@
 
 {% block body %}
     <h2>Doc</h2>
+    <p>Here are documentation, such as flowcharts and a pseudocode-list of requirements.</p>
     <div class="flex-two-cols">
-        <div class="left-col">
+        <div class="left-col-to-left">
+
+        <h3>Classes needed</h3>
+        <ul style="list-style-type: circle;">
+            <li>Game - Responsible for general gameplay </li>
+            <li>CardHand - Player for manipulating a deck</li>
+            <li>CardBank (extends CardHand) - Bank might need extra features, such as a automated
+            gameloop</li>
+            <li>DeckOfCards - A deck, can be altered and return info about itself</li>
+            <li>CardGraphics - Graphics for all the cards, not a critical class but makes stuff nicer</li>
+        </ul> <br>
+        <h3>Gameplay cycle</h3>
+        <ul style="list-style-type: circle;">
+        <h4>CardHand/CardBank's (Player) responsiblity</h4>
+            <li>Class main purpose is to represent a player in the game </li>
+            <li>if player/bank draw cards add it to individual sums</li>
+            <li>check if isOver21(). returns false/true</li>
+        </ul> <br>
+
+        <h4>CardGraphics responsiblity</h4>
+        <ul style="list-style-type: circle;">
+            <li>Provide graphics reference to the cards</li>
+            <li>Provide a sorted associative array that can be used to sort the DeckOfCards</li>
+        </ul> <br>
+        <ul style="list-style-type: circle;">
+        <h4>Game object's responsiblity</h4>
+            <li>Class main purpose is to offer a gameplay loop that can handle player choices</li>
+            <li>Game should keep track of whos turn it is since its holding the player-objects</li>
+            <li>If a check if Over21() returns true -> end game and current player lose</li>
+            <li>If a check if Over21() returns false -> let player draw another card or settle</li>
+            <li>If a player settles Game should update the current player to next (maybe +1 to variable?)</li>
+        </ul> 
+
         <a href="{{ asset('img/flow21.png') }}">
-        <img class="flowchart" src="{{ asset('img/flow21.png') }}" alt="Uml diagram of Card related classes"></a> 
+        <img class="flowchart" src="{{ asset('img/flow21.png') }}" alt="21 game flow chart"></a> 
         </div>
         <div class="right-col">
-{{ include("/game/nav/game_nav.html.twig")}}
+        {{ include("/game/nav/game_nav.html.twig")}}
 
         </div>
     </div>

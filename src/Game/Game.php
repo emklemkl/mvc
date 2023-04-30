@@ -8,7 +8,11 @@ use App\Card\CardHand;
 // use App\Card\DeckOfCards;
 
 /**
- * @variable array<object> $playerHands
+ * @variable $totalPlayers Keeps track on how many players there are(Max 2 atm)
+ * @variable $playerTurn Keeps track on whose turn it is
+ * @variable $playerHands Holds all the players, including the bank.
+ *
+ * Handles the main gameplay flow, from start to finish.
  */
 class Game
 {
@@ -25,16 +29,23 @@ class Game
         }
     }
 
+    /**
+     *  Return all players
+     */
     public function getHands(): array
     {
         return $this->playerHands;
     }
 
     /**
-     * Is current player above 21?
-     * if so game is over and other player won
+     * Main gameplay cycle.
+     * Checks whose turn it is and draws a card for that player
+     * The Banks turn is automated (bank is last player).
+     * If banks turn, the last while loop is run until conditions is met.
+     * Then returns a bool if the bank is done.
+     * Is current player above 21? if so game is over and other player won
      */
-    public function gameplayCycle() : bool
+    public function gameplayCycle(): bool
     {
         $bankDone = false;
         $this->playerHands[$this->whosTurnIsIt()]->drawCards();
@@ -53,17 +64,26 @@ class Game
         return $bankDone;
     }
 
-    public function getDrawnCardsGame()
+    /**
+     * Return the current players drawn cards
+     */
+    public function getDrawnCardsGame(): array
     {
         return $this->playerHands[$this->whosTurnIsIt()]->printDrawnCards();
     }
 
-    public function whosTurnIsIt()
+    /**
+     * Returns an int, telling whoe turn it is. Bank i always last
+     */
+    public function whosTurnIsIt(): int
     {
         return $this->playerTurn;
     }
 
-    public function currentPlayerName($other = " ") : string
+    /**
+     * Return player or bank name
+     */
+    public function currentPlayerName($other = " "): string
     {
         if ($other === "other") {
             return $this->playerTurn !== 0 ? "Player" : "Bank";
@@ -74,22 +94,31 @@ class Game
     /**
      * Returns true if the bank is the current player (bank plays last)
      */
-    public function isBanksTurn() : bool
+    public function isBanksTurn(): bool
     {
         return $this->totalPlayers === $this->playerTurn ? false : true;
     }
 
+    /**
+     * Increments playerTurn to allow the next player 2 play
+     */
     public function nextPlayerTurn()
     {
         $this->playerTurn += 1;
     }
 
-    public function isOver21() : bool
+    /**
+     * Check if current player exceeds 21
+     */
+    public function isOver21(): bool
     {
         return $this->playerHands[$this->whosTurnIsIt()]->isOver21();
     }
 
-    public function getAllDrawnCards() : array
+    /**
+     * Returns an array with ALL drawn cards combined
+     */
+    public function getAllDrawnCards(): array
     {
         $allCards = [];
         foreach ($this->playerHands as $ph) {
@@ -99,13 +128,16 @@ class Game
     }
 
     /**
-     * Returns the winner
+     * Returns the winner [0] is player and [1] is bank
      */
-    public function getWinner() : string
+    public function getWinner(): string
     {
         $playerScores = [];
         for ($i=0; $i < 2 ; $i++) {
             $playerScores[] =  $this->getMaxScores($this->playerHands[$i]);
+        }
+        if ($playerScores[1] === 21) {
+            return "Bank";
         }
         if (!$playerScores[0]) {
             return "Bank";
@@ -115,7 +147,10 @@ class Game
         return $playerScores[0] <= $playerScores[1] ? "Bank" : "Player";
     }
 
-    public function getMaxScores($player) : array
+    /**
+     * Return the highest legal score for a player
+     */
+    public function getMaxScores($player): mixed
     {
         $playerScores = [];
         $playerLH = $player->getDrawnSum();
@@ -126,18 +161,10 @@ class Game
             if ($score <= 21) {
                 $playerScores[] = $score;
             }
-            return $playerScores;
         }
+        if (!$playerScores) {
+            $playerScores[] = 0;
+        }
+        return max($playerScores);
     }
 }
-
-// Handle gameplay cycle
-/**
- * Gameplay cycle
- * -> if player draw cards add it to sums
- * -> and check if isOver21() returns false/true
- * -> If true -> end game and current player lose
- * -> If false -> let player draw another card or settle
- *
- * -> Game need 2 keep track of whos turn it is
- */
