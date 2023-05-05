@@ -83,7 +83,7 @@ class Game
     /**
      * Return player or bank name
      */
-    public function currentPlayerName($other = " "): string
+    public function currentPlayerName($other = ""): string
     {
         if ($other === "other") {
             return $this->playerTurn !== 0 ? "Player" : "Bank";

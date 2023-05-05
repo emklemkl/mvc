@@ -116,7 +116,38 @@ har bara gjort lite basic anpassning.</p>
 
     </p>
     <h2 id="kmom04">Kmom04</h2>
-    <p>Kmom1</p>
+    {# Berätta hur du upplevde att skriva kod som testar annan kod med PHPUnit och hur du upplever phpunit rent allmänt.
+
+    Hur väl lyckades du med kodtäckningen av din kod, lyckades du nå mer än 90% kodtäckning?
+
+    Upplever du din egen kod som “testbar kod” eller finns det delar i koden som är mer eller mindre testbar och finns det saker som kan göras för att förbättra kodens testbarhet?
+
+    Valde du att skriva om delar av din kod för att förbättra den eller göra den mer testbar, om så berätta lite hur du tänkte.
+
+    Fundera över om du anser att testbar kod är något som kan identifiera “snygg och ren kod”.
+
+    Vilken är din TIL för detta kmom? #}
+    <p>Jag är ofta skeptisk mot att göra saker med Php i ren allmänhet, men jag får lov att säga att testerna var trivsamma att arbeta med och erbjöd ett bra flow. Jag har upptäckt att det 
+    är ganska svårt att testa sin egen kod på ett kritiskt och konstruktivt sätt. Även att majoriteten av min kod var någorlunda lättestad så tyckte jag det var svårt att komma på sätt att testa sönder 
+    min kod. Såklart går allt att ta sönder. Men jag upplever det som en hårfin gräns mellan att testa de delar som är vitala för att en klass ska fungera som tänkt och att skriva 
+    extremt riktade tester bara för att klassen ska göra fel. Det jag menar är enkelt utryckt att Det finns alltid små hål att täppa och det är ibland svårt att veta vilka som är värda att 
+    lägga energi på.</p><br>
+
+    <p>Jag lyckades ganska bra med kodtäckningen, 100% på Card och 93.75% på Game. Som jag tidigare nämnde tycker dock det är utmanade att skriva opartiska och konstruktiva testfall 
+    till min egen kod, det kanske kan vara en Nackdel med såkallad 'White-box-testing'? I allmänhet tycker jag dock min kod i Card var ganska lättestad då jag hade många små funktioner som gjorde 
+    få saker. Däremot upptäckte jag att Game-klassen har för många ansvarsområden i gameplayCycle(), getWinner() och getMaxScores() vilket gjorde det svårt att att testa olika delar i funktionerna. 
+    Det som har kunnat förbättras där är dels att bryta ut kod till flera mindre funktioner men även att flytta över en del av ansvaret i funktionerna till CardHand/Cardbank-klasserna istället. 
+    Jag gjorde dock inga större ändringar i min kod då jag ligger lite efter i kursen och försöker lägga min tid på det som är hårda krav. Men jag har en idé om vad som hade behövts om jag hade hunnit.
+    </p><br>
+    <p>Är testbar kod snygg och ren? Mja, generellt anser jag nog det. Om man klarar av att balansera den OCD man riskerar att uppleva om ALLT ska vara 100% testbart. Att skriva tester till 
+    min kod har helt klart gett mig ett nytt perspektiv på vilka brister och fördelar min skrivna kod har. Flera gånger under testningen hittade jag småsaker som hade kunnat vara mycket bättre 
+    om jag gjort på något alternativt sätt och lärdomen jag tar med mig till framtida kodingssessioner när jag sitter och skriver lite tveksamma, bökigare och större funktioner är att ställa mig 
+    frågan "Kommer det gå att testa det här på ett någorlunda vettigt sätt?". Jag tror det kommer hjälpa mig att skriva lite bättre kod.</p><br>
+
+    <p>Min TIL är att det faktiskt var lite kul att sitta med tester. Vilket jag inte trodde jag skulle tycka. Jag hade gärna i framtiden sett något moment när man ska testa andras kod för att 
+    få ett bredare perspektiv. Jag tar gärna emot en extra mening med kritik på just mina tester och deras tillvägagångssätt då jag tror att om jag får en bättre förståelse för hur man 
+    ska tänka när man testar kan vara ett sätt för mig att bli en bättre kodare.
+</p>
     <h2 id="kmom05">Kmom05</h2>
     <p>Kmom1</p>
     <h2 id="kmom06">Kmom06</h2>

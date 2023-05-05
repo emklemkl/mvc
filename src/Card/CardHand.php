@@ -19,18 +19,18 @@ class CardHand
     /**
      * Gets a random key from the $deck and returns it
      */
-    public function getRandKeyFromHandDeck($amount = 1)
-    {
-        if ($amount > 52 || $amount < 0) {
-            throw new Exception("Min 0, Max 52");
-        }
-        $key[] = array_rand($this->getDeckInHandValues(), $amount);
-        $keys = [];
-        foreach ($key as $i) {
-            $keys[] = $i;
-        }
-        return $keys;
-    }
+    // public function getRandKeyFromHandDeck($amount = 1) : array
+    // {
+    //     if ($amount > 52 || $amount < 0) {
+    //         throw new Exception("Min 0, Max 52");
+    //     }
+    //     $key[] = array_rand($this->getDeckInHandValues(), $amount);
+    //     $keys = [];
+    //     foreach ($key as $i) {
+    //         $keys[] = $i;
+    //     }
+    //     return $keys;
+    // }
 
     /**
      * Get deck object containing all the cards the player holds
@@ -52,7 +52,7 @@ class CardHand
     /**
      * Shuffle
      */
-    public function shuffleHandDeck()
+    public function shuffleHandDeck(): array
     {
         $deck = $this->deckInHand;
         $shuffleThis = $deck->getDeck();
@@ -64,7 +64,7 @@ class CardHand
     /**
      * Get/return deck Array containing all the cards/values the player holds
      */
-    public function getDeckInHandValues()
+    public function getDeckInHandValues(): array
     {
         return $this->deckInHand->getDeck();
     }
@@ -72,7 +72,7 @@ class CardHand
     /**
      * Gets and returns all the cards in the deck with Graphics
      */
-    public function getDeckInHandValuesGraph()
+    public function getDeckInHandValuesGraph(): array
     {
         return  $this->deckInHand->getDeckWithGraphic();
     }
@@ -88,7 +88,7 @@ class CardHand
     }
 
     /**
-     * Calls on functions to  Draw and remove  X random cards. Defualt argument is 1
+     * Calls on functions to  Draw and remove  X random cards. Default argument is 1
      * Also saves the drawn cards to $drawnCards[]
      */
     public function drawCards($quantity = 1): array
@@ -150,6 +150,9 @@ class CardHand
         return [$sumLow, $sumHigh];
     }
 
+    /**
+     * Return array with two ints containing high and low score value
+     */
     public function getDrawnSum(): array
     {
         $sumLow = 0;
@@ -166,7 +169,7 @@ class CardHand
      * Checks if the current deck value is above 21.
      * returns True if above else false
      */
-    public function isOver21()
+    public function isOver21(): bool
     {
         $isOver21 = false;
         $deckValues = $this->getDrawnSum();

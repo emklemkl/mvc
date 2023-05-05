@@ -17,7 +17,7 @@ class CardGraphic
         return $this->deckGraphics;
     }
 
-    protected function __construct()
+    public function __construct()
     {
         // const
     }
