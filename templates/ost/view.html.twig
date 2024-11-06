@@ -1,0 +1,5 @@
+<ul>
+    {% for o in ost %}
+        <li>{{ o.getName|e }} ({{ o.getId|e }}) {{ o.getValue|e }}</li>
+    {% endfor %}
+</ul>

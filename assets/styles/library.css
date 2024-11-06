@@ -1,0 +1,21 @@
+table {
+    width: 100%;
+}
+
+table tr {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 100%;
+}
+
+table tr:nth-child(even) {
+    background-color: #e0dddd;
+    ;
+}
+
+.book_cover {
+    max-width: 8rem;
+    max-height: 8rem;
+}

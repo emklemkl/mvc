@@ -1,5 +1,6 @@
 body {
-    background-color: #afb9d0;
+    /* background-color: #afb9d0; */
+    background-color: #FAFAFA;
     min-height: 100vh;
     display: flex;
     flex-direction: column;

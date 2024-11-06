@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Game;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use PHPUnit\Framework\TestCase;
 use App\Card\DeckOfCards;
 use App\Card\CardBank;

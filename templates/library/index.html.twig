@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LibraryController!{% endblock %}
+
+{% block body %}
+
+<table>
+    <th>Title</th>
+    <th>ISBN</th>
+    <th>Athor</th>
+    <th>Cover</th>
+        {% for book in all_books %}
+        <tr>
+            <td> <a href="{{ path('library') }}"> {{ book.getTitle|e }} </a> </td>
+            <td> {{ book.getIsbn|e }} </td>
+            <td> {{ book.getAuthor|e }} </td>
+            <td> <img class="book_cover" src="{{ asset('img/book_cover.webp') }}" alt="Symfony!"/>  </td>
+        </tr>
+        {% endfor %}
+</table>
+{% endblock %}
