@@ -3,7 +3,10 @@
 {% block title %}Hello LibraryController!{% endblock %}
 
 {% block body %}
-<form action="" method="post"></form>
+{{ form_start(form, { 'method': 'POST' }) }}
+    {{ form_widget(form) }}
+     {{ form_rest(form) }}
+{{ form_end(form) }}
 <table>
     <th>Title</th>
     <th>ISBN</th>
@@ -14,7 +17,7 @@
             <td> <a href="{{ path('library_view_book', {isbn: book.isbn|e } ) }}"> {{ book.getTitle|e }} </a> </td>
             <td> {{ book.getIsbn|e }} </td>
             <td> {{ book.getAuthor|e }} </td>
-            <td> <img class="book_cover" src="{{ asset('img/book_cover.webp') }}" alt="A book cover"/>  </td>
+            <td> <img class="book_cover" src="{{ asset(book.getCover|e) }}" alt="A book cover"/>  </td>
         </tr>
         {% endfor %}
 </table>

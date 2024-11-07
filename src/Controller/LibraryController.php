@@ -7,6 +7,10 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class LibraryController extends AbstractController
 {
@@ -14,33 +18,57 @@ class LibraryController extends AbstractController
     public function showAllLibraryBooks(
         LibraryRepository $libRepository
     ): Response {
+        $task = new Library();
+        $task->setAuthor('Write a blog post');
+        $task->setCover("img/book_cover.webp");
+
+        $form = $this->createFormBuilder()
+            ->setAction($this->generateUrl("library_create_book"))
+            ->setMethod('POST')
+            ->add('title', TextType::class)
+            ->add('isbn', TextType::class)
+            ->add('author', TextType::class)
+            ->add('cover', TextType::class, ["data" => "img/book_cover.webp"])
+            ->add('add', SubmitType::class, ['label' => 'Add Book'])
+            ->getForm();
+        // $form = $this->createForm(LibraryType::class, $task);
         $lib = $libRepository->findAll();
         return $this->render('library/index.html.twig', [
-            'all_books' => $lib,
+            'all_books' => $lib, "form" => $form->createView() 
         ]);
     }
 
-    #[Route('/library/book/create', name: 'library_create_book')]
+    #[Route('/library/book/create', name: 'library_create_book', methods: ["POST"])]
     public function createBook(
-        ManagerRegistry $doctrine
+        ManagerRegistry $doctrine,
+        Request $request
     ): Response {
+        $randNumber = rand(1000000, 9999999);
         $entityManager = $doctrine->getManager();
 
+        // Retrieve and handle the form
+        $form = $this->createFormBuilder()
+            ->add('title', TextType::class)
+            ->add('isbn', TextType::class)
+            ->add('author', TextType::class)
+            ->add('cover', TextType::class)
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+        
+        $data = $form->getData();
         $book = new Library();
-        $book->setTitle("A fancy book");
-        $book->setAuthor("Some Writer");
-        $book->setIsbn("0123456781");
-        $book->setCover("./path/to/image.png");
+        $book->setTitle($data["title"]);
+        $book->setAuthor($data["author"]);
+        $book->setIsbn(isset($data["isbn"]) ? strval($data["isbn"]) : strval($randNumber));
+        $book->setCover(isset($data["cover"]) ? ($data["cover"]) : "./path/to/image.png");
 
-
-        // tell Doctrine you want to (eventually) save the book
-        // (no queries yet)
         $entityManager->persist($book);
-
-        // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
 
-        return new Response('Saved new book with id ' . $book->getId());
+        return $this->redirectToRoute('library');
+        }
+    return new Response("No book was created");
     }
 
     #[Route('/library/book/view/{isbn}', name: 'library_view_book')]
