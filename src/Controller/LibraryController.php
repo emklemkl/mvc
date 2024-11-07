@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LibraryController extends AbstractController
 {
-    #[Route('/library', name: 'library')]
+    #[Route('/library/books', name: 'library')]
     public function showAllLibraryBooks(
         LibraryRepository $libRepository
     ): Response {
@@ -20,7 +20,7 @@ class LibraryController extends AbstractController
         ]);
     }
 
-    #[Route('/library/create/book', name: 'library_create_book')]
+    #[Route('/library/book/create', name: 'library_create_book')]
     public function createBook(
         ManagerRegistry $doctrine
     ): Response {
@@ -29,7 +29,7 @@ class LibraryController extends AbstractController
         $book = new Library();
         $book->setTitle("A fancy book");
         $book->setAuthor("Some Writer");
-        $book->setIsbn("0123456789");
+        $book->setIsbn("0123456781");
         $book->setCover("./path/to/image.png");
 
 
@@ -43,17 +43,17 @@ class LibraryController extends AbstractController
         return new Response('Saved new book with id ' . $book->getId());
     }
 
-    #[Route('/library/view/book/{id}', name: 'library_view_book')]
+    #[Route('/library/book/view/{isbn}', name: 'library_view_book')]
     public function showLibraryBook(
         LibraryRepository $libRepository,
-        int $id
+        string $isbn
         ): Response {
-        $book = $libRepository->find($id);
+        $book = $libRepository->findByIsbnField($isbn);
 
         return $this->json($book);
     }
 
-    #[Route("/library/delete/book/{id}", name: "library_delete")]  // SHOULD BE POST
+    #[Route("/library/book/delete/{id}", name: "library_delete", methods: ["POST"])]  // SHOULD BE POST
     public function deleteLibraryBook(
         ManagerRegistry $doctrine,
         int $id
@@ -70,7 +70,7 @@ class LibraryController extends AbstractController
         return $this->redirectToRoute('library');
     }
 
-    #[Route("library/update/book/{id}", name: "library_delete")] // SHOULD BE POST WITH DETAILS IN BODY
+    #[Route("library/book/update/{id}", name: "library_update", methods: ["POST"])] // SHOULD BE POST WITH DETAILS IN BODY
     public function updateLibraryBook(
         ManagerRegistry $doctrine,
         int $id

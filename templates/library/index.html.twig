@@ -3,7 +3,7 @@
 {% block title %}Hello LibraryController!{% endblock %}
 
 {% block body %}
-
+<form action="" method="post"></form>
 <table>
     <th>Title</th>
     <th>ISBN</th>
@@ -11,10 +11,10 @@
     <th>Cover</th>
         {% for book in all_books %}
         <tr>
-            <td> <a href="{{ path('library') }}"> {{ book.getTitle|e }} </a> </td>
+            <td> <a href="{{ path('library_view_book', {isbn: book.isbn|e } ) }}"> {{ book.getTitle|e }} </a> </td>
             <td> {{ book.getIsbn|e }} </td>
             <td> {{ book.getAuthor|e }} </td>
-            <td> <img class="book_cover" src="{{ asset('img/book_cover.webp') }}" alt="Symfony!"/>  </td>
+            <td> <img class="book_cover" src="{{ asset('img/book_cover.webp') }}" alt="A book cover"/>  </td>
         </tr>
         {% endfor %}
 </table>
