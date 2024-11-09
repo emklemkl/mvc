@@ -3,9 +3,8 @@
 {% block title %}Hello LibraryController!{% endblock %}
 
 {% block body %}
-{{ form_start(form, { 'method': 'POST' }) }}
+{{ form_start(form)}}
     {{ form_widget(form) }}
-     {{ form_rest(form) }}
 {{ form_end(form) }}
 <table>
     <th>Title</th>

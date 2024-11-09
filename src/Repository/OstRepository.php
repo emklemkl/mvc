@@ -23,7 +23,7 @@ class OstRepository extends ServiceEntityRepository
 
     /**
      * Find all ost having a value above the specified one.
-     * 
+     *
      * @return Ost[] Returns an array of ost objects
      */
     public function findByMinimumValue($value): array
@@ -39,7 +39,7 @@ class OstRepository extends ServiceEntityRepository
 
     /**
      * Find all producs having a value above the specified one with SQL.
-     * 
+     *
      * @return [][] Returns an array of arrays (i.e. a raw data set)
      */
     public function findByMinimumValue2($value): array

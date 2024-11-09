@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use App\Entity\Library;
 use App\Repository\LibraryRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -11,30 +12,25 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use App\Form\LibraryType;
 
 class LibraryController extends AbstractController
 {
     #[Route('/library/books', name: 'library')]
     public function showAllLibraryBooks(
-        LibraryRepository $libRepository
+        LibraryRepository $libRepository,
     ): Response {
-        $task = new Library();
-        $task->setAuthor('Write a blog post');
-        $task->setCover("img/book_cover.webp");
-
-        $form = $this->createFormBuilder()
-            ->setAction($this->generateUrl("library_create_book"))
-            ->setMethod('POST')
-            ->add('title', TextType::class)
-            ->add('isbn', TextType::class)
-            ->add('author', TextType::class)
-            ->add('cover', TextType::class, ["data" => "img/book_cover.webp"])
-            ->add('add', SubmitType::class, ['label' => 'Add Book'])
-            ->getForm();
-        // $form = $this->createForm(LibraryType::class, $task);
+        $library = new Library();
         $lib = $libRepository->findAll();
+
+        $form = $this->createForm(LibraryType::class, $library, [
+            'action' => $this->generateUrl('library_create_book'), // Set form action here
+            'method' => 'POST',
+        ])->add('add', SubmitType::class, ['label' => 'Add book']);
+
         return $this->render('library/index.html.twig', [
-            'all_books' => $lib, "form" => $form->createView() 
+            'all_books' => $lib,
+            "form" => $form->createView()
         ]);
     }
 
@@ -43,75 +39,96 @@ class LibraryController extends AbstractController
         ManagerRegistry $doctrine,
         Request $request
     ): Response {
-        $randNumber = rand(1000000, 9999999);
+
         $entityManager = $doctrine->getManager();
-
-        // Retrieve and handle the form
-        $form = $this->createFormBuilder()
-            ->add('title', TextType::class)
-            ->add('isbn', TextType::class)
-            ->add('author', TextType::class)
-            ->add('cover', TextType::class)
-            ->getForm();
+        $library = new Library();
+        $form = $this->createForm(LibraryType::class, $library);
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-        
-        $data = $form->getData();
-        $book = new Library();
-        $book->setTitle($data["title"]);
-        $book->setAuthor($data["author"]);
-        $book->setIsbn(isset($data["isbn"]) ? strval($data["isbn"]) : strval($randNumber));
-        $book->setCover(isset($data["cover"]) ? ($data["cover"]) : "./path/to/image.png");
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
 
-        $entityManager->persist($book);
-        $entityManager->flush();
+            $entityManager->persist($library);
+            $entityManager->flush();
 
-        return $this->redirectToRoute('library');
+            return $this->redirectToRoute('library');
         }
-    return new Response("No book was created");
+        return new Response("No book was created");
     }
 
     #[Route('/library/book/view/{isbn}', name: 'library_view_book')]
     public function showLibraryBook(
         LibraryRepository $libRepository,
         string $isbn
-        ): Response {
+    ): Response {
         $book = $libRepository->findByIsbnField($isbn);
+        $library = new Library();
+        $library->setTitle($book[0]->getTitle());
+        $library->setIsbn($isbn);
+        $library->setAuthor($book[0]->getAuthor());
+        $library->setCover($book[0]->getCover());
 
-        return $this->json($book);
+        $formUpdate = $this->createForm(LibraryType::class, $library, [
+            'action' => $this->generateUrl('library_update_book', ["id" => $book[0]->getId()]), // Set form action here
+            'method' => 'POST',
+        ])->add('add', SubmitType::class, ['label' => 'Update']);
+        $formDelete = $this->createForm(LibraryType::class, $library, [
+            'action' => $this->generateUrl('library_delete_book'), // Set form action here
+            'method' => 'POST',
+            'only_isbn' => true
+        ]);
+        return $this->render('library/library_view_book.twig', [
+            'all_books' => $book,
+            "formDelete" => $formDelete->createView(),
+            "formUpdate" => $formUpdate->createView(),
+        ]);
     }
 
-    #[Route("/library/book/delete/{id}", name: "library_delete", methods: ["POST"])]  // SHOULD BE POST
+    #[Route("/library/book/delete", name: "library_delete_book", methods: ["POST"])]  // SHOULD BE POST
     public function deleteLibraryBook(
         ManagerRegistry $doctrine,
-        int $id
+        LibraryRepository $libRepository,
+        Request $request,
     ): Response {
         $entityManager = $doctrine->getManager();
-        $book = $entityManager->getRepository(Library::class)->find($id);
-        if (!$book) {
-            throw $this->createNotFoundException(
-                "No book found on this id". $id
-            );
+        $library = new Library();
+        $form = $this->createForm(LibraryType::class, $library, [
+        'only_isbn' => true
+        ]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $isbn = $library->getIsbn();
+            $book = $libRepository->findByIsbnField($isbn);
+            if (!$book) {
+                throw $this->createNotFoundException(
+                    "No book found on this isbn" . $isbn
+                );
+            }
+            $entityManager->remove($book[0]);
+            $entityManager->flush();
         }
-        $entityManager->remove($book);
-        $entityManager->flush();
         return $this->redirectToRoute('library');
+
     }
 
-    #[Route("library/book/update/{id}", name: "library_update", methods: ["POST"])] // SHOULD BE POST WITH DETAILS IN BODY
+    #[Route("library/book/update/{id}", name: "library_update_book", methods: ["POST"])] // SHOULD BE POST WITH DETAILS IN BODY
     public function updateLibraryBook(
         ManagerRegistry $doctrine,
+        Request $request,
         int $id
     ): Response {
         $entityManager = $doctrine->getManager();
         $book = $entityManager->getRepository(Library::class)->find($id);
+        $form = $this->createForm(LibraryType::class, $book);
         if (!$book) {
             throw $this->createNotFoundException(
-                "No book found on this id" . $id
+                "No book found on this id"
             );
         }
-        $book->setTitle("New title");
-        $entityManager->flush();
-        return $this->redirectToRoute("library_view_book", ["id"=> $id]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute("library_view_book", ["isbn" => $book->getIsbn()]);
     }
 }

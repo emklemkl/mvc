@@ -26,13 +26,13 @@ class LibraryRepository extends ServiceEntityRepository
      */
     public function findByIsbnField($value): array
     {
-    return $this->createQueryBuilder('l')
-        ->andWhere('l.isbn = :val')
-        ->setParameter('val', $value)
-        ->orderBy('l.id', 'ASC')
-        ->setMaxResults(10)
-        ->getQuery()
-        ->getResult();
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.isbn = :val')
+            ->setParameter('val', $value)
+            ->orderBy('l.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
     }
 
     //    public function findOneBySomeField($value): ?Library

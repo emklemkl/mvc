@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use App\Entity\Library;
 use App\Repository\LibraryRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -22,7 +23,7 @@ class LibraryControllerJson extends AbstractController
     public function showLibraryBook(
         LibraryRepository $libRepository,
         string $isbn
-        ): Response {
+    ): Response {
         // $book = $libRepository->find($isbn);
         $book = $libRepository->findByIsbnField("$isbn");
 
