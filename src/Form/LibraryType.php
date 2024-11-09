@@ -20,7 +20,7 @@ class LibraryType extends AbstractType
             ->add('isbn', HiddenType::class, [
                 'required' => true,
             ])
-            ->add('delete', SubmitType::class, ['label' => 'Delete Book'])
+            ->add('delete', SubmitType::class, ['label' => 'Delete'])
             ;
         } else {
 
@@ -28,7 +28,9 @@ class LibraryType extends AbstractType
             ->add('title', TextType::class)
             ->add('isbn', TextType::class)
             ->add('author', TextType::class)
-            ->add('cover', TextType::class, ["data" => "img/book_cover.webp"])
+            ->add('cover', TextType::class, ['attr' => [
+                'placeholder' => 'img/book_cover.webp',
+            ],])
             ->add('add', SubmitType::class, ['label' => 'Add Book'])
             ;
         }

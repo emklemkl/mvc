@@ -3,11 +3,14 @@
 {% block title %}Hello LibraryController!{% endblock %}
 
 {% block body %}
-<div class="view-wrapper">
+<div class="view-wrapper"> <div class="left_side_book_view">
         {{ form_start(formDelete)}}
             {{ form_widget(formDelete) }}
         {{ form_end(formDelete) }}
+    <a href="{{ path('library') }}" class="back_to_view">Back..</a>
         {{ form_start(formUpdate)}}
+        {{ form_widget(formUpdate.add) }}
+</div>
 <table>
     <th>Title</th>
     <th>ISBN</th>

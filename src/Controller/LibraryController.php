@@ -126,7 +126,6 @@ class LibraryController extends AbstractController
         }
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
             $entityManager->flush();
         }
         return $this->redirectToRoute("library_view_book", ["isbn" => $book->getIsbn()]);

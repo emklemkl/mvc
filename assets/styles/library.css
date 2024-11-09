@@ -22,6 +22,21 @@ table tr:nth-child(even) {
     min-height: 4rem;
 }
 
+.back_to_view {
+    border: 1px solid black;
+    text-decoration: none;
+    margin-left: 0 !important;
+    min-width: 6rem;
+    max-width: 100%;
+    padding: 0.7rem;
+    font-size: 1.4em;
+    color: #eeb7c5;
+    background-color: #8c92ac;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
 div#library {
     display: flex;
     gap: 1.5rem;
@@ -41,9 +56,20 @@ div>input {
 #library_add {
     text-decoration: none;
     padding: 0.7rem;
-    font-size: 1.1em;
+    font-size: 1.4em;
     color: white;
     background-color: #8c92ac;
+    border-radius: 1rem;
+    margin-top: 1.5rem;
+}
+
+#library_delete {
+    text-decoration: none;
+    min-width: 6rem;
+    padding: 0.7rem;
+    font-size: 1.4em;
+    color: white;
+    background-color: #ac8c8c;
     border-radius: 1rem;
 }
 
@@ -59,9 +85,18 @@ th {
     width: 20%;
 }
 
+td>input {
+    height: 2rem;
+}
+
+.left_side_book_view {
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
 .view-wrapper {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto auto;
+    display: flex;
+    align-items: center;
     gap: 10px;
 }
