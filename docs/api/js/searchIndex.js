@@ -436,56 +436,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-LuckyControllerTwig.html#method_report"
         },                {
-            "fqsen": "\\App\\Controller\\OstController",
-            "name": "OstController",
-            "summary": "",
-            "url": "classes/App-Controller-OstController.html"
-        },                {
-            "fqsen": "\\App\\Controller\\OstController\u003A\u003Aindex\u0028\u0029",
-            "name": "index",
-            "summary": "",
-            "url": "classes/App-Controller-OstController.html#method_index"
-        },                {
-            "fqsen": "\\App\\Controller\\OstController\u003A\u003AcreateOst\u0028\u0029",
-            "name": "createOst",
-            "summary": "",
-            "url": "classes/App-Controller-OstController.html#method_createOst"
-        },                {
-            "fqsen": "\\App\\Controller\\OstController\u003A\u003AshowAllOst\u0028\u0029",
-            "name": "showAllOst",
-            "summary": "",
-            "url": "classes/App-Controller-OstController.html#method_showAllOst"
-        },                {
-            "fqsen": "\\App\\Controller\\OstController\u003A\u003AshowOstById\u0028\u0029",
-            "name": "showOstById",
-            "summary": "",
-            "url": "classes/App-Controller-OstController.html#method_showOstById"
-        },                {
-            "fqsen": "\\App\\Controller\\OstController\u003A\u003AdeleteOstById\u0028\u0029",
-            "name": "deleteOstById",
-            "summary": "",
-            "url": "classes/App-Controller-OstController.html#method_deleteOstById"
-        },                {
-            "fqsen": "\\App\\Controller\\OstController\u003A\u003AupdateOst\u0028\u0029",
-            "name": "updateOst",
-            "summary": "",
-            "url": "classes/App-Controller-OstController.html#method_updateOst"
-        },                {
-            "fqsen": "\\App\\Controller\\OstController\u003A\u003AviewAllOst\u0028\u0029",
-            "name": "viewAllOst",
-            "summary": "",
-            "url": "classes/App-Controller-OstController.html#method_viewAllOst"
-        },                {
-            "fqsen": "\\App\\Controller\\OstController\u003A\u003AviewOstWithMinimumValue\u0028\u0029",
-            "name": "viewOstWithMinimumValue",
-            "summary": "",
-            "url": "classes/App-Controller-OstController.html#method_viewOstWithMinimumValue"
-        },                {
-            "fqsen": "\\App\\Controller\\OstController\u003A\u003AshowOstByMinimumValue\u0028\u0029",
-            "name": "showOstByMinimumValue",
-            "summary": "",
-            "url": "classes/App-Controller-OstController.html#method_showOstByMinimumValue"
-        },                {
             "fqsen": "\\App\\Dice\\Dice",
             "name": "Dice",
             "summary": "",
@@ -646,51 +596,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Entity-Library.html#property_cover"
         },                {
-            "fqsen": "\\App\\Entity\\Ost",
-            "name": "Ost",
-            "summary": "",
-            "url": "classes/App-Entity-Ost.html"
-        },                {
-            "fqsen": "\\App\\Entity\\Ost\u003A\u003AgetId\u0028\u0029",
-            "name": "getId",
-            "summary": "",
-            "url": "classes/App-Entity-Ost.html#method_getId"
-        },                {
-            "fqsen": "\\App\\Entity\\Ost\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "",
-            "url": "classes/App-Entity-Ost.html#method_getName"
-        },                {
-            "fqsen": "\\App\\Entity\\Ost\u003A\u003AsetName\u0028\u0029",
-            "name": "setName",
-            "summary": "",
-            "url": "classes/App-Entity-Ost.html#method_setName"
-        },                {
-            "fqsen": "\\App\\Entity\\Ost\u003A\u003AgetValue\u0028\u0029",
-            "name": "getValue",
-            "summary": "",
-            "url": "classes/App-Entity-Ost.html#method_getValue"
-        },                {
-            "fqsen": "\\App\\Entity\\Ost\u003A\u003AsetValue\u0028\u0029",
-            "name": "setValue",
-            "summary": "",
-            "url": "classes/App-Entity-Ost.html#method_setValue"
-        },                {
-            "fqsen": "\\App\\Entity\\Ost\u003A\u003A\u0024id",
-            "name": "id",
-            "summary": "",
-            "url": "classes/App-Entity-Ost.html#property_id"
-        },                {
-            "fqsen": "\\App\\Entity\\Ost\u003A\u003A\u0024name",
-            "name": "name",
-            "summary": "",
-            "url": "classes/App-Entity-Ost.html#property_name"
-        },                {
-            "fqsen": "\\App\\Entity\\Ost\u003A\u003A\u0024value",
-            "name": "value",
-            "summary": "",
-            "url": "classes/App-Entity-Ost.html#property_value"
-        },                {
             "fqsen": "\\App\\Form\\LibraryType",
             "name": "LibraryType",
             "summary": "",
@@ -805,26 +710,6 @@ Search.appendIndex(
             "name": "findByIsbnField",
             "summary": "",
             "url": "classes/App-Repository-LibraryRepository.html#method_findByIsbnField"
-        },                {
-            "fqsen": "\\App\\Repository\\OstRepository",
-            "name": "OstRepository",
-            "summary": "",
-            "url": "classes/App-Repository-OstRepository.html"
-        },                {
-            "fqsen": "\\App\\Repository\\OstRepository\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/App-Repository-OstRepository.html#method___construct"
-        },                {
-            "fqsen": "\\App\\Repository\\OstRepository\u003A\u003AfindByMinimumValue\u0028\u0029",
-            "name": "findByMinimumValue",
-            "summary": "Find\u0020all\u0020ost\u0020having\u0020a\u0020value\u0020above\u0020the\u0020specified\u0020one.",
-            "url": "classes/App-Repository-OstRepository.html#method_findByMinimumValue"
-        },                {
-            "fqsen": "\\App\\Repository\\OstRepository\u003A\u003AfindByMinimumValue2\u0028\u0029",
-            "name": "findByMinimumValue2",
-            "summary": "Find\u0020all\u0020producs\u0020having\u0020a\u0020value\u0020above\u0020the\u0020specified\u0020one\u0020with\u0020SQL.",
-            "url": "classes/App-Repository-OstRepository.html#method_findByMinimumValue2"
         },                {
             "fqsen": "\\",
             "name": "\\",
