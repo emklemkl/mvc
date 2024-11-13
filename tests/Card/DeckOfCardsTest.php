@@ -121,7 +121,8 @@ class DeckOfCardsTest extends TestCase
         $deck->removeCardsFromDeck(["h1", "c1", "c3"]);
         $res = $deck->getDeck();
         $exp = ["h1", "c1", "c3"];
-        for ($i=0; $i < count($exp); $i++) { 
+        $count = count($exp);
+        for ($i=0; $i < $count; $i++) { 
             $this->assertNotContains($exp[$i], $res);
         }
     }

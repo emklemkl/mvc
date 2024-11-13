@@ -110,14 +110,14 @@ class LibraryController extends AbstractController
 
     }
 
-    #[Route("library/book/update/{id}", name: "library_update_book", methods: ["POST"])] // SHOULD BE POST WITH DETAILS IN BODY
+    #[Route("library/book/update/{bookId}", name: "library_update_book", methods: ["POST"])] // SHOULD BE POST WITH DETAILS IN BODY
     public function updateLibraryBook(
         ManagerRegistry $doctrine,
         Request $request,
-        int $id
+        int $bookId
     ): Response {
         $entityManager = $doctrine->getManager();
-        $book = $entityManager->getRepository(Library::class)->find($id);
+        $book = $entityManager->getRepository(Library::class)->find($bookId);
         $form = $this->createForm(LibraryType::class, $book);
         if (!$book) {
             throw $this->createNotFoundException(
