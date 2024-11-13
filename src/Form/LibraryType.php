@@ -22,7 +22,7 @@ class LibraryType extends AbstractType
             ])
             ->add('delete', SubmitType::class, ['label' => 'Delete'])
             ;
-        } else {
+        } else if ($options["only_isbn"] == true) {
 
             $builder
             ->add('title', TextType::class)
