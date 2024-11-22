@@ -14,7 +14,7 @@ build:
       commands:
         - mkdir -p build
         # - composer install --no-interaction --prefer-dist
-        - ls -la vendor/bin
+        - pwd
         - XDEBUG_MODE=coverage vendor/bin/phpunit
           coverage:
             file: "build/coverage.clover"
