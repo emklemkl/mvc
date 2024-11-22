@@ -7,7 +7,7 @@ filter:
 build:
   nodes:
     my-tests:
-      root_path: ./ 
+      root_path: "/home/scrutinizer/build/" 
       environment:
         php:
           version: 8.1
