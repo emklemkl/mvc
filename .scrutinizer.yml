@@ -5,19 +5,23 @@ filter:
   excluded_paths: [vendor/*, test/*]
 
 build:
+  environment:
+    dependencies:
+    packages:
+      - openssl >=1.0.2
   nodes:
     my-tests:
-      environment:
-        php:
-          version: 8.1
+    environment:
+      php:
+      version: 8.1
     analysis:
-      tests:
-        override:
-          - php-scrutinizer-run
-  tests:
-    override:
-      - # command: "composer phpunit"
-        command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
-        coverage:
-          file: "docs/coverage.clover"
-          format: "php-clover"
+    tests:
+      override:
+        - php-scrutinizer-run
+tests:
+  override:
+    - # command: "composer phpunit"
+      command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
+      coverage:
+      file: "docs/coverage.clover"
+      format: "php-clover"
