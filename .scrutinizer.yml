@@ -1,26 +1,25 @@
 imports:
-  - php
+    - php
 
 filter:
-  excluded_paths: [vendor/*, test/*]
+    excluded_paths: [vendor/*, test/*, tools/*, src/Twig/*]
 
 build:
-  nodes:
-    my-tests:
-      root_path: "/home/scrutinizer/build/" 
-      environment:
-        php:
-          version: 8.1
-      commands:
-
-        # - composer install --no-interaction --prefer-dist
-        - pwd
-        - ls -la build
-        - XDEBUG_MODE=coverage vendor/bin/phpunit
-          coverage:
-            file: "build/coverage.clover"
-            format: "php-clover"
-    analysis:
-      tests:
+    image: default-bionic
+    nodes:
+        my-tests:
+            environment:
+                php:
+                    version: 8.1
+        analysis:
+            tests:
+                override:
+                    - php-scrutinizer-run
+    tests:
         override:
-          - php-scrutinizer-run
+            -
+                # command: "composer phpunit"
+                command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
+                coverage:
+                    file: "docs/coverage.clover"
+                    format: "php-clover"
