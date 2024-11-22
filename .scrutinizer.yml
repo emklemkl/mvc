@@ -5,8 +5,6 @@ filter:
   excluded_paths: [vendor/*, test/*]
 
 build:
-  before_commands:
-    - composer install --no-interaction --prefer-dist
   nodes:
     my-tests:
       environment:
