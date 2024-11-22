@@ -7,11 +7,12 @@ filter:
 build:
   nodes:
     my-tests:
-      root_path: "/home/scrutinizer/build/" 
       environment:
         php:
           version: 8.1
       commands:
+        - pwd # Debug to confirm working directory
+        - ls -la # List all files to confirm composer.json exists
         - mkdir -p build
         - composer install --no-interaction --prefer-dist
         - ls -la vendor/bin
