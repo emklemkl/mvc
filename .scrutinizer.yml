@@ -5,9 +5,6 @@ filter:
   excluded_paths: [vendor/*, test/*]
 
 build:
-  environment:
-    apt_packages:
-      - openssl
   nodes:
     my-tests:
       environment:
