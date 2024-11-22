@@ -11,7 +11,9 @@ build:
         php:
           version: 8.1
       commands:
-        - command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
+        - mkdir -p build
+        - composer install --no-interaction --prefer-dist
+        - XDEBUG_MODE=coverage vendor/bin/phpunit
           coverage:
             file: "build/coverage.clover"
             format: "php-clover"
