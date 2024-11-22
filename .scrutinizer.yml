@@ -6,22 +6,21 @@ filter:
 
 build:
   environment:
-    dependencies:
-    packages:
-      - openssl >=1.0.2
+    apt_packages:
+      - openssl
   nodes:
     my-tests:
-    environment:
+      environment:
       php:
-      version: 8.1
+       version: 8.1
     analysis:
-    tests:
-      override:
-        - php-scrutinizer-run
+      tests:
+        override:
+          - php-scrutinizer-run
 tests:
   override:
-    - # command: "composer phpunit"
-      command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
-      coverage:
+    #- # command: "composer phpunit"
+    command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
+    coverage:
       file: "docs/coverage.clover"
       format: "php-clover"
