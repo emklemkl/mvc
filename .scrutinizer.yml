@@ -5,6 +5,8 @@ filter:
   excluded_paths: [vendor/*, test/*]
 
 build:
+  before_commands:
+    - composer install --no-interaction --prefer-dist
   nodes:
     my-tests:
       environment:
@@ -13,7 +15,7 @@ build:
       commands:
         - command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
           coverage:
-            file: "docs/coverage.clover"
+            file: "build/coverage.clover"
             format: "php-clover"
     analysis:
       tests:
