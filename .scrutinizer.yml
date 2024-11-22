@@ -11,8 +11,8 @@ build:
   nodes:
     my-tests:
       environment:
-      php:
-       version: 8.1
+        php:
+          version: 8.1
     analysis:
       tests:
         override:
