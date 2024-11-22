@@ -12,10 +12,10 @@ build:
         php:
           version: 8.1
       commands:
-        - mkdir -p build
+
         # - composer install --no-interaction --prefer-dist
         - pwd
-        - ls -la
+        - ls -la build
         - XDEBUG_MODE=coverage vendor/bin/phpunit
           coverage:
             file: "build/coverage.clover"
