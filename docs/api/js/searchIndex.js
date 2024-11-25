@@ -711,6 +711,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Repository-LibraryRepository.html#method_findByIsbnField"
         },                {
+            "fqsen": "\\App\\Controller\\MetricsController",
+            "name": "MetricsController",
+            "summary": "",
+            "url": "classes/App-Controller-MetricsController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\MetricsController\u003A\u003AshowAllLibraryBooks\u0028\u0029",
+            "name": "showAllLibraryBooks",
+            "summary": "",
+            "url": "classes/App-Controller-MetricsController.html#method_showAllLibraryBooks"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",

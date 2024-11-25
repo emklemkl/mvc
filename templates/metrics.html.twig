@@ -3,73 +3,89 @@
 {% block title %}Metrics{% endblock %}
 
 {% block body %}
+<article class="article">
     <h1>Metrics</h1>
-<section>
-    <h2>Introduktion</h2>
-    <h3>Codestyle</h3>
-    Med kodstil så syftar man till de olika riktlinjer och standarder som finns. Det kan vara exempelvis namnkonventioner som camelCase och regler på hur lång en 
-    rad ska vara, m.m. Syftet är att ska snygg och enhetlig kod som alla kan vänja sig vid. Att bestämma sig för en kodstandard blir ännu viktigare om man är fler som 
-    arbetar på samma project. Annars riskerar koden att bli väldigt okonsekvent om alla gör på sig egna sätt. Det finns naturligtvis verktyg för att underlätta denna process, 
-    ett exempel är linters.
+    <section>
+        <h2>Introduktion</h2>
+        <h3>Codestyle</h3>
+        <p>
+        Med kodstil så syftar man till de olika riktlinjer och standarder som finns. Det kan vara exempelvis namnkonventioner som camelCase och regler på hur lång en 
+        rad ska vara, m.m. Syftet är att ska snygg och enhetlig kod som alla kan vänja sig vid. Att bestämma sig för en kodstandard blir ännu viktigare om man är fler som 
+        arbetar på samma project. Annars riskerar koden att bli väldigt okonsekvent om alla gör på sig egna sätt. Det finns naturligtvis verktyg för att underlätta denna process, 
+        ett exempel är linters.
+        </p>
 
-    <h3>Coverage</h3>
-    <p>Syftar till att visa till vilken grad koden är testad. Min kod har i runda slängar 28% kodtäckning, vilket kan anses som ganska lågt. <br> PhpUnit har visar 
-    tre olika nivåer på vad som anses vara bra procentuell kodtäckning:
-    <ul>
-        <li>- Low: 0% to 35%</li>
-        <li>- Medium: 35% to 70%</li>
-        <li>- High: 70% to 100%</li>
-    </ul>
-    <br>
-    <p>
-    Scrutinizer har dessa spann:
-    </p>
-    <ul>
-        <li>- Low: 0% to 40%</li>
-        <li>- Medium: 40% to 60%</li>
-        <li>- High: 60% to 100%</li>
-    </ul>
-    </p>
-    <h3>Complexity</h3>
-    <p>Berör hur avancerad koden är att underhålla, förstå och vidareutveckla. Som tool-tip så definerar Scrutinizer "Total Complexity" som "The number of decision 
-    points which change control flows (ifs, loops)". Exempelvis har min CardGraphics-class låg komplexitet då den inte innehåller några ifs, loopar eller likvärdigt.</p>
-    <h3>Cohesion</h3>
-    <p>
-    Begreppet Cohesion relaterar till "Single Responsibility Principle". Alltså målet är att en klass ska ha ett tydligt syfte och inte sköta för många uppgifter. 
-    Det är önskvärt att varje klass har ett tydligt syfte. Om en klass har för många ansvarsområden (low cohesion) så är det rimligt att undersöka om man kan bryta ut 
-    funktionalitet från den klassen. Low cohesion riskerar även att spilla över till applikationen komplexitet.
-    </p>
-    <h3>Coupling</h3>
-    <p>
-    Handlar om hur olika klasser är beroende av varandra. Det är önskvärt att ha "low coupling" då det gör klasserna mer självständiga genom att inte vara beroende 
-    av hur en annan klass agerar eller vilket state den befinner sig i. Om påverkan från en annan klass state hålls låg så ökar möjligheterna att utveckla vidare 
-    koden utan att riskera att ta sönder externa klasser eller delar i programmet. Det leder till kod som är enklare och säkrare att jobba med.
-    </p>
-    <h3>CRAP</h3>
-    <p>
-    CRAP är ett mått på hur mycket arbete som krävs för att förbättra metoder som anses vara "crap". 
-    Detta index kombinerar komplexitet och coverage för att uppskatta risken och svårigheten att underhålla en funktion. (Jag hittade dock inget i Phpmetrics om detta)
-    </p>
-</section>
-
-
-<section>
-    <h2>Phpmetrics</h2>
-    {# <img class="" src="{{ asset('img/metrics_lib.png') }}" alt="Metrics"> #}
-</section>
-<section>
-    <h2>Scrutinizer</h2>
-
-        <img src="https://scrutinizer-ci.com/g/emklemkl/mvcreport/badges/quality-score.png?b=main" alt="Scrutinizer badge">
-        <img src="https://scrutinizer-ci.com/g/emklemkl/mvcreport/badges/coverage.png?b=main" alt="Scrutinizer badge">
-        <img src="https://scrutinizer-ci.com/g/emklemkl/mvcreport/badges/build.png?b=main" alt="Scrutinizer badge">
-        <img src="https://scrutinizer-ci.com/g/emklemkl/mvcreport/badges/code-intelligence.svg?b=main" alt="Scrutinizer badge">
+        <h3>Coverage</h3>
+        <p>Syftar till att visa till vilken grad koden är testad. Min kod har i runda slängar 28% kodtäckning, vilket kan anses som ganska lågt. <br> PhpUnit har visar 
+        tre olika nivåer på vad som anses vara bra procentuell kodtäckning:
+        <ul>
+            <li>- Low: 0% to 35%</li>
+            <li>- Medium: 35% to 70%</li>
+            <li>- High: 70% to 100%</li>
+        </ul>
+        <br>
+        <p>
+        Scrutinizer har dessa spann:
+        </p>
+        <ul>
+            <li>- Low: 0% to 40%</li>
+            <li>- Medium: 40% to 60%</li>
+            <li>- High: 60% to 100%</li>
+        </ul>
+        </p>
+        <h3>Complexity</h3>
+        <p>Berör hur avancerad koden är att underhålla, förstå och vidareutveckla. Som tool-tip så definerar Scrutinizer "Total Complexity" som "The number of decision 
+        points which change control flows (ifs, loops)". Exempelvis har min CardGraphics-class låg komplexitet då den inte innehåller några ifs, loopar eller likvärdigt.</p>
+        <h3>Cohesion</h3>
+        <p>
+        Begreppet Cohesion relaterar till "Single Responsibility Principle". Alltså målet är att en klass ska ha ett tydligt syfte och inte sköta för många uppgifter. 
+        Det är önskvärt att varje klass har ett tydligt syfte. Om en klass har för många ansvarsområden (low cohesion) så är det rimligt att undersöka om man kan bryta ut 
+        funktionalitet från den klassen. Low cohesion riskerar även att spilla över till applikationen komplexitet.
+        </p>
+        <h3>Coupling</h3>
+        <p>
+        Handlar om hur olika klasser är beroende av varandra. Det är önskvärt att ha "low coupling" då det gör klasserna mer självständiga genom att inte vara beroende 
+        av hur en annan klass agerar eller vilket state den befinner sig i. Om påverkan från en annan klass state hålls låg så ökar möjligheterna att utveckla vidare 
+        koden utan att riskera att ta sönder externa klasser eller delar i programmet. Det leder till kod som är enklare och säkrare att jobba med.
+        </p>
+        <h3>CRAP</h3>
+        <p>
+        CRAP är ett mått på hur mycket arbete som krävs för att förbättra metoder som anses vara "crap". 
+        Detta index kombinerar komplexitet och coverage för att uppskatta risken och svårigheten att underhålla en funktion. (Jag hittade dock inget i Phpmetrics om detta)
+        </p>
     </section>
 
-<section>
-    <h2>Förbättringar</h2>
-</section>
-<section>
-    <h2>Diskussion</h2>
-</section>
+
+    <section>
+        <h2>Phpmetrics</h2>
+        <img class="image" src="{{ asset('img/metrics_lib.png') }}" alt="Metrics"> <br><br>
+        <p>
+        Från bilden ovan kan vi se att klassen både är komplex och saknar tester. Detta är till stor del väntat då det inte fanns krav att skriva tester under kmom05, samt 
+        att ganska mycket logik för databaskommunikationen ligger i routesen i Controllern. Här finns två förbättringspotentialer på samma klass. Första delen är att skriva 
+        tester, andra delen är att bryta ut databas-logiken från Controllersen och lägga den i en service istället. En vanlig klass skulle även fungera men det känns rimligt 
+        att lägga databaskommunikationen som en service istället. <br><br>
+        </p>
+        <img class="image" src="{{ asset('img/metrics2_lib.png') }}" alt="Metrics"><br><br>
+        <p>
+        Det mest återkommande problemet med min kod verkar vara att Controllerna är för komplexa. Jag har bara två violations (som för övrigt är ganska flummiga), men man 
+        ser även att GameController ligger på en hög komplexitet. Att lyckas hålla kod så simpel som möjligt är, enligt mig, ett bra fokus så jag ser även här att koden 
+        behöver brytas ut i fler klasser, alternativt simplifieras.
+        </p>
+    </section>
+    <section>
+        <h2>Scrutinizer</h2>
+
+            <img src="https://scrutinizer-ci.com/g/emklemkl/mvcreport/badges/quality-score.png?b=main" alt="Scrutinizer badge">
+            <img src="https://scrutinizer-ci.com/g/emklemkl/mvcreport/badges/coverage.png?b=main" alt="Scrutinizer badge">
+            <img src="https://scrutinizer-ci.com/g/emklemkl/mvcreport/badges/build.png?b=main" alt="Scrutinizer badge">
+            <img src="https://scrutinizer-ci.com/g/emklemkl/mvcreport/badges/code-intelligence.svg?b=main" alt="Scrutinizer badge">
+        </section>
+
+    <section>
+        <h2>Förbättringar</h2>
+    </section>
+    <section>
+        <h2>Diskussion</h2>
+    </section>
+</article>
 {% endblock %}
