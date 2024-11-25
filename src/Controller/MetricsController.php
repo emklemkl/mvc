@@ -12,7 +12,7 @@ class MetricsController extends AbstractController
     #[Route('/metrics', name: 'metrics')]
     public function showAllLibraryBooks(
     ): Response {
-
+        
         return $this->render('metrics.html.twig');
     }
 }
