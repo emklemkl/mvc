@@ -19,7 +19,7 @@ class DeckOfCards extends CardGraphic
             'd1','d2','d3','d4','d5','d6','d7','d8','d9','d10','d11','d12','d13',
             'c1','c2','c3','c4','c5','c6','c7','c8','c9','c10','c11','c12','c13'
         ];
-        if ($deckVals) {
+        if (! empty($deckVals)) {
             $this->deck = $deckVals;
         }
     }
