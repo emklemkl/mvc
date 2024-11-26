@@ -50,11 +50,11 @@ class Game
         $bankDone = false;
         $this->playerHands[$this->whosTurnIsIt()]->drawCards();
         if ($this->isBanksTurn()) {
-            while (!$bankDone) {
+            while (true) {
                 $scores = $this->playerHands[$this->whosTurnIsIt()]->getDrawnSum();
                 if ($this->isBetween17And21($scores)) {
                     $bankDone  = true;
-                    return $bankDone;
+                    break;
                 }
                 $this->playerHands[$this->whosTurnIsIt()]->drawCards();
             }

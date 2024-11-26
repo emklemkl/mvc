@@ -631,6 +631,11 @@ Search.appendIndex(
             "summary": "Main\u0020gameplay\u0020cycle.",
             "url": "classes/App-Game-Game.html#method_gameplayCycle"
         },                {
+            "fqsen": "\\App\\Game\\Game\u003A\u003AisBetween17And21\u0028\u0029",
+            "name": "isBetween17And21",
+            "summary": "",
+            "url": "classes/App-Game-Game.html#method_isBetween17And21"
+        },                {
             "fqsen": "\\App\\Game\\Game\u003A\u003AgetDrawnCardsGame\u0028\u0029",
             "name": "getDrawnCardsGame",
             "summary": "Return\u0020the\u0020current\u0020players\u0020drawn\u0020cards",
@@ -721,6 +726,66 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-MetricsController.html#method_showAllLibraryBooks"
         },                {
+            "fqsen": "\\App\\Library\\LibraryUtil",
+            "name": "LibraryUtil",
+            "summary": "Lib\u0020util",
+            "url": "classes/App-Library-LibraryUtil.html"
+        },                {
+            "fqsen": "\\App\\Library\\LibraryUtil\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Library-LibraryUtil.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Library\\LibraryUtil\u003A\u003AbookExists\u0028\u0029",
+            "name": "bookExists",
+            "summary": "Return\u0020all\u0020players",
+            "url": "classes/App-Library-LibraryUtil.html#method_bookExists"
+        },                {
+            "fqsen": "\\App\\Service\\LibraryService",
+            "name": "LibraryService",
+            "summary": "",
+            "url": "classes/App-Service-LibraryService.html"
+        },                {
+            "fqsen": "\\App\\Service\\LibraryService\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Service-LibraryService.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Service\\LibraryService\u003A\u003ApersistBook\u0028\u0029",
+            "name": "persistBook",
+            "summary": "",
+            "url": "classes/App-Service-LibraryService.html#method_persistBook"
+        },                {
+            "fqsen": "\\App\\Service\\LibraryService\u003A\u003AdestroyBook\u0028\u0029",
+            "name": "destroyBook",
+            "summary": "",
+            "url": "classes/App-Service-LibraryService.html#method_destroyBook"
+        },                {
+            "fqsen": "\\App\\Service\\LibraryService\u003A\u003AmodifyBook\u0028\u0029",
+            "name": "modifyBook",
+            "summary": "",
+            "url": "classes/App-Service-LibraryService.html#method_modifyBook"
+        },                {
+            "fqsen": "\\App\\Service\\LibraryService\u003A\u003AgetRepoById\u0028\u0029",
+            "name": "getRepoById",
+            "summary": "",
+            "url": "classes/App-Service-LibraryService.html#method_getRepoById"
+        },                {
+            "fqsen": "\\App\\Service\\LibraryService\u003A\u003A\u0024doctrine",
+            "name": "doctrine",
+            "summary": "",
+            "url": "classes/App-Service-LibraryService.html#property_doctrine"
+        },                {
+            "fqsen": "\\App\\Service\\LibraryService\u003A\u003A\u0024libRepository",
+            "name": "libRepository",
+            "summary": "",
+            "url": "classes/App-Service-LibraryService.html#property_libRepository"
+        },                {
+            "fqsen": "\\App\\Service\\LibraryService\u003A\u003A\u0024libraryUtil",
+            "name": "libraryUtil",
+            "summary": "",
+            "url": "classes/App-Service-LibraryService.html#property_libraryUtil"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
@@ -761,9 +826,19 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/app.html"
         },                {
+            "fqsen": "\\App\\Library",
+            "name": "Library",
+            "summary": "",
+            "url": "namespaces/app-library.html"
+        },                {
             "fqsen": "\\App\\Repository",
             "name": "Repository",
             "summary": "",
             "url": "namespaces/app-repository.html"
+        },                {
+            "fqsen": "\\App\\Service",
+            "name": "Service",
+            "summary": "",
+            "url": "namespaces/app-service.html"
         }            ]
 );

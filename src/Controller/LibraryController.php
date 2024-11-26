@@ -104,7 +104,7 @@ class LibraryController extends AbstractController
         $book = $libraryService->getRepoById($id);
         $form = $this->createForm(LibraryType::class, $book);
         $form->handleRequest($request);
-        $isSuccess = $libraryService->modifyBook($form, $id);
+        $isSuccess = $libraryService->modifyBook($form);
         if ($isSuccess) {
             return $this->redirectToRoute("library_view_book", ["isbn" => $book->getIsbn()]);
         }

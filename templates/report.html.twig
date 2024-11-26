@@ -175,7 +175,37 @@ har bara gjort lite basic anpassning.</p>
      Som tidigare nämnt, min TIL får vara mitt nya perspektiv om att Php faktiskt kan vara relativt smidigt att jobba med, det krävdes dock en del erfarenhet för att uppnå detta perspektivet.</p>
      <p>Jag har några lint-relaterade problem som jag valt att inte bry mig om då felen finns i filer som har genererats av Doctrine eller Symfony.</p>
     <h2 id="kmom06">Kmom06</h2>
-    <p>Kmom1</p>
+    {# 
+    - Hur uppfattade du verktyget phpmetrics och fann du några särskilda bitar mer värdefulla än andra? 
+    Var det några särskilda metrics eller bilder du uppskattade?
+
+    - Berätta hur det gick att integrera med Scrutinizer och vilken är din första känsla av verktyget och dess badges? 
+    Vilken kodtäckning och kodkvalitet fick du efter första bygget?
+
+    - Hur är din egen syn på kodkvalitet, berätta lite om den? Tror du man kan man påvisa kodkvalitet i någon viss mån med badges eller vad tror du?
+    - Vilken är din TIL för detta kmom? #}
+    <p>Jag upplevde Phpmetrics reltivt överflödigt, man fick en offantlig mängd statistik som inte sa mig speciellt mycket. Problem kan jag tycka är att man behöver 
+    lägga ganska mycket energi för att sätta sig in i vad alla delar betyder, detta tar helt enkelt för mycket tid från resterande del av kursmomentet. Så ärligt talat 
+    är jag osäker på om jag använd det på rätt sätt eller inte. Verktyget saknade även bra tooltips och liknande vilket gjorde det frustrerande att använda. Stastik är 
+    härligt, men utan tillräckligt med kontext så är det inte värt så mycket. Jag ser klart möjligheter med liknande verktyg, men detta var alldeles för klumpigt och tungjobbat 
+    att sätta sig in i och lyckas med (på runt 20 timmar). </p>
+    <p>Scrutinizer var ännu värre än Phpmetrics, det var lite besvärligt att få det att fungera då den har väldigt varierande kvalité på sin feedback vid krashar. Men när 
+    verktyget väl var igång så fungerade det som det skulle (om än tungrott). Scrutinizers UI gjorde det väldigt svårt att manövrera och även detta verktyget saknade 
+    simpla tooltips och förklaringar på diverse saker. Den enda fördelen var att Scrutinizer faktiskt visade olika fel och försökte förklara varför den ansåg att det var fel. 
+    Förklaringarna hade dock varierande kvalitet. Min initiala kodkvalitet vad 9.97 och testtäckningen var 28%.
+    Jag inser att jag låter väldigt negativt inställd till detta, men det har främst med användarupplevelsen hos verktygen att göra. Det kändes lite som att backa med släp utan att titta bakåt,
+    visst kommer man bakåt, men det är lite oklart om det går vettigt till.
+    Annars anser jag att kodkvalitet är ett intressant ämne. Jag har nog inte någon konkret definition, men bland de viktigaste delarna är att koden går relativt lätt att 
+    läsa och förstå. När jag skulle ändra på min gamla kod i samband med detta kmom så upplevde jag ibland en frustration över vad jag har slarvat på. Det största misstaget 
+    jag hittar i min egna kod är att den har låg cohesion, vilket var anledningen till att jag valde att fokusera mycket på det. Sen är det såklart skillnad på hur man resonerar 
+    nu och under tiden jag skrev koden i kmom01-04. 
+    </p>
+    <p>Kan man påvisa kodkvalitet i någon viss mån med badges? Bra fråga, jag skulle nog säga att det hjälper till att ge ett bättre första intryck, men sen hänger det till 
+    stor del på vilken kvalité verktygen i bakgrunden som tar fram betygen och badgesen håller. Jag upplever Scrutinizer som relativt opålitligt då den gett min kod 10/10, fast att 
+    jag själv kan hitta stora brister i min kodbad utan större ansträngning. Får ett oinsatt öga så känns det säkert tryggare, lite som en CE-märkning. Visst låter det bra, 
+    men stämmer det verkligen alltid? Min TIL är att jag har blivit bättre på att förstå och tillämpa ett objektorienterat tankesätt på kod. När vi läste denna kursen i årskurs ett så tyckte jag 
+    det var väldigt utmanade. Nu har jag själv valt att ta ut svängarna lite på ett mer MVC och objektorienterat sätt i både kmom05-06 genom att använda services och att jobba 
+    med Symfonys inbyggda funktionalitet, som exempelvis FormBuilderInterface.</p>
     <h2 id="kmom10">Kmom10</h2>
     <p>Kmom1</p>
 
