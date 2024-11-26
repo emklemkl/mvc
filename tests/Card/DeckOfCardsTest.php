@@ -27,9 +27,6 @@ class DeckOfCardsTest extends TestCase
         $deck = new DeckOfCards();
         $res = $deck->getDeck();
         $this->assertIsArray($res);
-
-        $deck = new DeckOfCards(['h1']);
-        $this->assertIsArray($res);
     }
 
     /**
