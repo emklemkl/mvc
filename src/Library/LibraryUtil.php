@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Library;
+
 use Exception;
 
 /**
