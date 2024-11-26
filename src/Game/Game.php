@@ -52,7 +52,7 @@ class Game
         if ($this->isBanksTurn()) {
             while (!$bankDone) {
                 $scores = $this->playerHands[$this->whosTurnIsIt()]->getDrawnSum();
-                if ($this->isBetween17And21($scores) || $this->isOver21()) {
+                if ($this->isBetween17And21($scores)) {
                     $bankDone  = true;
                     continue;
                 }
@@ -64,7 +64,7 @@ class Game
 
     public function isBetween17And21($scores): bool
     {
-        return $scores[0] >= 17 && $scores[0] <= 21 || $scores[1] >= 17 && $scores[1] <= 21;
+        return $scores[0] >= 17 && $scores[0] <= 21 || $scores[1] >= 17 && $scores[1] <= 21  || $this->isOver21();
     }
 
     /**
