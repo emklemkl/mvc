@@ -37,7 +37,7 @@ class LibraryService {
         return false; # Fail
         }
 
-    public function modifyBook($form, $id): bool {
+    public function modifyBook($form): bool {
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->doctrine->getManager();
             $entityManager->flush();

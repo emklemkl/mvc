@@ -5,14 +5,12 @@ namespace App\Controller;
 use App\Entity\Library;
 use App\Service\LibraryService;
 use App\Repository\LibraryRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Form\LibraryType;
-use App\Library\LibraryUtil;
 
 class LibraryController extends AbstractController
 {
@@ -48,9 +46,6 @@ class LibraryController extends AbstractController
             return $this->redirectToRoute('library');
         }
         return new Response("No book was created");
-
-        // }
-        
     }
 
     #[Route('/library/book/view/{isbn}', name: 'library_view_book')]

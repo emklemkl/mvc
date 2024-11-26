@@ -78,7 +78,7 @@
             del på vad det olika if-satserna leder. Koden fungerar som tänkt så man bör kanske inte "laga något som är sönder" men däremot så är metoden svår att förstår sig 
             på då det finns många olika vägar att ta. Det är ett tydligt exempel på "low cohesion", metoden gör så mycket så det är inte direkt tydligt vad det huvudsyfte är. </p>
             <img class="image" src="{{ asset('img/scrut_gameplay-cycle.png') }}" alt="Metrics"> <br><br>
-    
+
             <p>Nästa fel lyder:</p>
             <q>The expression return $this->createQuer...getQuery()->getResult() could return the type integer which is incompatible with the type-hinted return array. 
             Consider adding an additional type-check to rule them out.</q>
@@ -120,6 +120,14 @@
     </section>
     <section>
         <h2>Diskussion</h2>
+        <h3>Innan fix:</h3>
+          <img class="image" src="{{ asset('img/metrics_lib.png') }}" alt="Metrics"> <br><br>
+        <h3>Efter fix:</h3>
+          <img class="image" src="{{ asset('img/metrics_lib_fixed.png') }}" alt="Metrics"> <br><br>
+        <h3>Innan fix:</h3>
+          <img class="image" src="{{ asset('img/metrics2_lib.png') }}" alt="Metrics"> <br><br>
+        <h3>Efter fix:</h3>
+          <img class="image" src="{{ asset('img/metrics2_lib_fixed.png') }}" alt="Metrics"> <br><br>
     </section>
 </article>
 {% endblock %}
