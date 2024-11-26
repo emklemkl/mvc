@@ -30,7 +30,6 @@ class DeckOfCardsTest extends TestCase
 
         $deck = new DeckOfCards(['h1']);
         $this->assertIsArray($res);
-        $res = $deck->getDeck();
     }
 
     /**

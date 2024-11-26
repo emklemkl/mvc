@@ -50,14 +50,14 @@ class GameController extends AbstractController
         $game = $session->get("game");
         $isBankFinished = $game->gameplayCycle();
         if ($game->isOver21()) {
-            $game = $session->set("game", $game);
+            $session->set("game", $game);
             return $this->redirectToRoute('game_finished');
         }
         if ($isBankFinished) {
-            $game = $session->set("game", $game);
+            $session->set("game", $game);
             return $this->redirectToRoute('game_finished');
         }
-        $game = $session->set("game", $game);
+        $session->set("game", $game);
         return $this->redirectToRoute('game_play');
     }
 

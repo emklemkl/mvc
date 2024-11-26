@@ -41,7 +41,6 @@ class LibraryController extends AbstractController
         Request $request
     ): Response {
 
-        $entityManager = $doctrine->getManager();
         $library = new Library();
         $form = $this->createForm(LibraryType::class, $library);
         $form->handleRequest($request);
