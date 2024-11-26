@@ -60,20 +60,39 @@
         <h2>Phpmetrics</h2>
         <img class="image" src="{{ asset('img/metrics_lib.png') }}" alt="Metrics"> <br><br>
         <p>
-        Från bilden ovan kan vi se att klassen både är komplex och saknar tester. Detta är till stor del väntat då det inte fanns krav att skriva tester under kmom05, samt 
+        Från bilden ovan kan vi se att klassen både är komplex (6C) och saknar tester. Detta är till stor del väntat då det inte fanns krav att skriva tester under kmom05, samt 
         att ganska mycket logik för databaskommunikationen ligger i routesen i Controllern. Här finns två förbättringspotentialer på samma klass. Första delen är att skriva 
         tester, andra delen är att bryta ut databas-logiken från Controllersen och lägga den i en service istället. En vanlig klass skulle även fungera men det känns rimligt 
         att lägga databaskommunikationen som en service istället. <br><br>
         </p>
         <img class="image" src="{{ asset('img/metrics2_lib.png') }}" alt="Metrics"><br><br>
         <p>
-        Det mest återkommande problemet med min kod verkar vara att Controllerna är för komplexa. Jag har bara två violations (som för övrigt är ganska flummiga), men man 
+        Det mest återkommande problemet med min kod verkar vara att Controllerna är för komplexa (6). Jag har bara två violations (som för övrigt är ganska flummiga), men man 
         ser även att GameController ligger på en hög komplexitet. Att lyckas hålla kod så simpel som möjligt är, enligt mig, ett bra fokus så jag ser även här att koden 
         behöver brytas ut i fler klasser, alternativt simplifieras.
         </p>
     </section>
     <section>
         <h2>Scrutinizer</h2>
+            <p>I bilden nedanför så har vi det största klagomålet som Scrutinizer hade att erbjuda. Metoden försöker sköta flera olika delar som i sig beror till stor 
+            del på vad det olika if-satserna leder. Koden fungerar som tänkt så man bör kanske inte "laga något som är sönder" men däremot så är metoden svår att förstår sig 
+            på då det finns många olika vägar att ta. Det är ett tydligt exempel på "low cohesion", metoden gör så mycket så det är inte direkt tydligt vad det huvudsyfte är. </p>
+            <img class="image" src="{{ asset('img/scrut_gameplay-cycle.png') }}" alt="Metrics"> <br><br>
+
+            <p>Nästa fel lyder:</p> 
+            <q>The expression return $this->createQuer...getQuery()->getResult() could return the type integer which is incompatible with the type-hinted return array. 
+            Consider adding an additional type-check to rule them out.</q>
+            <p>Det låter egentligen inte som världens största problem, framför allt inte om man vet att felet inte kan inträffa, men jag tycker det är viktigt att nämna 
+            då jag generellt förlitar mig på att return type hintsen stämmer när jag själv läser andras kod. Stämmer inte den så gör den ingen nytta. Detta felet är 
+            ganska tydligt kopplat till kodstil (6C), man skulle väl även kunna anse att det berör cohesion lite grann med tanke på att metoden nu kan göra mer än 
+            den borde (genom att returna en integer istället för en array). Då detta faller inom samma katergori så räknar jag även in dem få tillfällen där jag inte 
+            använt rätt jämförare (så som (!empty($anArray)) istället för (!$anArray))</p>
+
+            <p>Nästa förbättringspotential ligger i att städa upp i koden. Jag har ett flertal ställen där jag rent av varit slarvig och lämnat dubblerad kod 
+            eller död kod. Detta påverkar inte appens funktionalitet, men det påverkar kodens läsbarhet och borde ligga i mitt intresse och min yrkesstolthet i att 
+            lämna ett städat jobb bakom mig. Även detta kan kopplas till kodstilen bland 6C, det är inte kritiskt men det blir trevligare för alla om man håller det 
+            snyggt och prydligt.</p> 
+            <img class="image" src="{{ asset('img/scrut_dead_code.png') }}" alt="Metrics"> <br><br>
 
             <img src="https://scrutinizer-ci.com/g/emklemkl/mvcreport/badges/quality-score.png?b=main" alt="Scrutinizer badge">
             <img src="https://scrutinizer-ci.com/g/emklemkl/mvcreport/badges/coverage.png?b=main" alt="Scrutinizer badge">
@@ -83,6 +102,19 @@
 
     <section>
         <h2>Förbättringar</h2>
+        <p>Den första förbättringen jag vill göra är att minska komplexiteten i gameplayCycle-metoden, det var den delen som fick mest kritik av scrutinizer. 
+        Det känns som den viktigaste instatsen jag kan göra. Anledningen till att jag tycker detta är viktigt är hör man på nyckelordet "komplex", 
+        vilket innebär att något är avancerat och svårt att förstå sig på. Den känns fullt 
+        rimligt att sträva efter att göra saker o-komplexa. Denna uppdatering kommer höja Scrutinizers betyg på metoden genom att minska komplexiteten.</p>
+
+        <p>Den andra förbättringen jag vill göra är att säkerställa att koden gör som förväntat genom att se till att type hintsen faktiskt stämmer och metoden returnar 
+        det som står. Jag passar även på att uppdatera Php-specifika checks (så som (!empty($array)) istället för (!$array)). Syftet är att minska antalet buggar (som 
+        Scrutinizer kommer hitta) och att följa best praxises. </p>
+
+        <p>Den tredje förbättringen jag vill göra är att flytta ut databaskommunikationen från LibraryController till serviceklasser. 
+        Detta minskar LibraryControllers arbetsbörda och gör att den får ett tydligare uppdrag, vilket följer Single Responsibility Principle och gör 
+        koden enklare att återanvända. En service är enklare att testa isolerat, vilket gynnar framtida testmöjligheter.</p>
+
     </section>
     <section>
         <h2>Diskussion</h2>
