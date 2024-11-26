@@ -101,6 +101,7 @@
             <img src="https://scrutinizer-ci.com/g/emklemkl/mvcreport/badges/build.png?b=main" alt="Scrutinizer badge">
             <img src="https://scrutinizer-ci.com/g/emklemkl/mvcreport/badges/code-intelligence.svg?b=main" alt="Scrutinizer badge">
         </section>
+        <br>
 
     <section>
         <h2>Förbättringar</h2>
@@ -117,17 +118,44 @@
         Detta minskar LibraryControllers arbetsbörda och gör att den får ett tydligare uppdrag, vilket följer Single Responsibility Principle och gör 
         koden enklare att återanvända. En service är enklare att testa isolerat, vilket gynnar framtida testmöjligheter.</p>
 
-    </section>
-    <section>
-        <h2>Diskussion</h2>
         <h3>Innan fix:</h3>
+        <p>Man ser tydligt att LibraryController var väldigt komplex på flera plan innan jag uppdaterade koden</p>
           <img class="image" src="{{ asset('img/metrics_lib.png') }}" alt="Metrics"> <br><br>
         <h3>Efter fix:</h3>
+        <p>Här ser vi tydliga förbättringar, den största förändringen jag gjorde var att implementera en service för att sköta databaskommunikationen. Då kunde jag 
+        flytta en stor del av logiken till serviceklassen istället, detta minskade LibraryControllers Complexitet samt gav den högre cohesion då den nu har mindre  och 
+        mer specifikt ansvarsområde. Det finns dock möjliget att flytta ut form handlern i en egen service också för att komma ner i komplexitet ännu mer. Men jag valde att 
+        fokusera på databasdelen (annars kommer detta kmom ta för mycket tid). </p>
           <img class="image" src="{{ asset('img/metrics_lib_fixed.png') }}" alt="Metrics"> <br><br>
         <h3>Innan fix:</h3>
           <img class="image" src="{{ asset('img/metrics2_lib.png') }}" alt="Metrics"> <br><br>
         <h3>Efter fix:</h3>
+        Det ser inte ut som att det har hänt jättemycket när man bara kolla på översikten. Men den cyklomatiska komplexiteten är det jag har fösökt fokusera på (se bild och text ovan).
+        Jag lyckades dock sänka det redan låga average bugs med 0.1, samtidigt så drog jag på mig en violation till. Den var dock inte allvarlig så jag kände inte att det 
+        var värt besväret.
           <img class="image" src="{{ asset('img/metrics2_lib_fixed.png') }}" alt="Metrics"> <br><br>
+        <h3>Innan fix:</h3>
+        <p>Det fanns lite för många avancerade conditions att hantera i metoden.</p>
+          <img class="image" src="{{ asset('img/scrut_gameplay_cycle.png') }}" alt="Metrics"> <br><br> 
+        <h3>Efter fix:</h3>
+        <p>Genom att flytta ut if-satserna till en egen funktion så lyckades jag halvera antal conditions och CRAP-score. Metodens betyg ökade även från B till A. 
+        Appens poäng ökade till 10/10 poäng nu efter uppdateringarna.</p>
+          <img class="image" src="{{ asset('img/scrut_gameplay_cycle_fix.png') }}" alt="Metrics"> <br><br>
+    </section>
+    <section>
+        <h2>Diskussion</h2>
+        Kan man aktivt jobba med kodkvalitet och “clean code” på detta sättet?
+        <p>Visst är det möjligt att jobba med "clean code" på detta sättet, förutsättningen är dock att man har ett bra verktyg som man hinner sätta sig in i och som 
+        kompleterar mina brister som utvecklare. Scrutinizer gör väl detta till viss del, men det är en av de mer o-intuitiva hjälpmedel jag använt. Det krånglar men än det 
+        gör nytta och har väldigt varierande kvalité på den feedback man får. Men jag ser ändå möjligheter med liknande vertyg om dem är mer genomtänkta. 
+        Php-metrics gav väl lite samma känsla. Den visade relativt tydlig statistik och likvärdigt, men i många fall så kändes det inte som att alla värden faktiskt sa mig så mycket, 
+        många förkortningar utan tooltips osv. Den stora nackdelen är väl just det att de kan ta mer energi än det är värt, framför allt i mindre projekt. Men jag skulle säga 
+        att vikten av sådana hjälpmedel ökar i takt med storleken på applikationen och utvecklarteamet. Det hjälper folk att håller en standard samt så får alla samma förväntnigar på sig</p>
+        <p>Andra sätt att jobba med clean code finns såklart, beroende på vilken nivå man vill lägga det på. Ett mer manuellt sätt är att engagera sig i diskussioner på 
+        forum och mer kollegor om vad och varför något är clean code eller inte. Det finns inte nödvändigtvis ett empiriskt bevisat resultat på vad som är "renast kod". 
+        Även om det finns generella mallar och best practises så betyder inte det att det är "bäst". Det kanske är det bästa just nu, men genom diskution och intresset 
+        kanske man kan komma på något ännu bättre.</p>
+
     </section>
 </article>
 {% endblock %}
