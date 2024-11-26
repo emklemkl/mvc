@@ -47,19 +47,16 @@ class Game
      */
     public function gameplayCycle(): bool
     {
-        $bankDone = false;
         $this->playerHands[$this->whosTurnIsIt()]->drawCards();
         if ($this->isBanksTurn()) {
-            while (!$bankDone) {
+            while (true) { # Run until score is between 17 and 21
                 $scores = $this->playerHands[$this->whosTurnIsIt()]->getDrawnSum();
                 if ($this->isBetween17And21($scores)) {
-                    $bankDone  = true;
-                    continue;
+                    return true; # Return true when bank is done.
                 }
                 $this->playerHands[$this->whosTurnIsIt()]->drawCards();
             }
         }
-        return $bankDone;
     }
 
     public function isBetween17And21($scores): bool
