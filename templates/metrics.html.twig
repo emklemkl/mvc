@@ -78,10 +78,12 @@
             del på vad det olika if-satserna leder. Koden fungerar som tänkt så man bör kanske inte "laga något som är sönder" men däremot så är metoden svår att förstår sig 
             på då det finns många olika vägar att ta. Det är ett tydligt exempel på "low cohesion", metoden gör så mycket så det är inte direkt tydligt vad det huvudsyfte är. </p>
             <img class="image" src="{{ asset('img/scrut_gameplay-cycle.png') }}" alt="Metrics"> <br><br>
-
-            <p>Nästa fel lyder:</p> 
+    
+            <p>Nästa fel lyder:</p>
             <q>The expression return $this->createQuer...getQuery()->getResult() could return the type integer which is incompatible with the type-hinted return array. 
             Consider adding an additional type-check to rule them out.</q>
+            <br>
+            <br>
             <p>Det låter egentligen inte som världens största problem, framför allt inte om man vet att felet inte kan inträffa, men jag tycker det är viktigt att nämna 
             då jag generellt förlitar mig på att return type hintsen stämmer när jag själv läser andras kod. Stämmer inte den så gör den ingen nytta. Detta felet är 
             ganska tydligt kopplat till kodstil (6C), man skulle väl även kunna anse att det berör cohesion lite grann med tanke på att metoden nu kan göra mer än 
