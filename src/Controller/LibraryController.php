@@ -3,14 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Library;
+use App\Service\LibraryService;
 use App\Repository\LibraryRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Form\LibraryType;
 use App\Library\LibraryUtil;
@@ -37,22 +36,21 @@ class LibraryController extends AbstractController
 
     #[Route('/library/book/create', name: 'library_create_book', methods: ["POST"])]
     public function createBook(
-        ManagerRegistry $doctrine,
+        LibraryService $libraryService,
         Request $request
     ): Response {
 
         $library = new Library();
         $form = $this->createForm(LibraryType::class, $library);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $doctrine->getManager();
-
-            $entityManager->persist($library);
-            $entityManager->flush();
-
+        $isSuccess = $libraryService->persistBook($form, $library);
+        if ($isSuccess) {
             return $this->redirectToRoute('library');
         }
         return new Response("No book was created");
+
+        // }
+        
     }
 
     #[Route('/library/book/view/{isbn}', name: 'library_view_book')]
@@ -85,41 +83,36 @@ class LibraryController extends AbstractController
 
     #[Route("/library/book/delete", name: "library_delete_book", methods: ["POST"])]  // SHOULD BE POST
     public function deleteLibraryBook(
-        ManagerRegistry $doctrine,
-        LibraryRepository $libRepository,
+        LibraryService $libraryService,
         Request $request,
     ): Response {
-        $entityManager = $doctrine->getManager();
         $library = new Library();
         $form = $this->createForm(LibraryType::class, $library, [
         'only_isbn' => true
         ]);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $isbn = $library->getIsbn();
-            $book = $libRepository->findByIsbnField($isbn);
-            LibraryUtil::bookExists($book);
-            $entityManager->remove($book[0]);
-            $entityManager->flush();
+        $isSuccess = $libraryService->destroyBook($form, $library);
+        if ($isSuccess) {
+            return $this->redirectToRoute('library');
         }
-        return $this->redirectToRoute('library');
+        return new Response("No book was deleted");
 
     }
 
     #[Route("library/book/update/{id}", name: "library_update_book", methods: ["POST"])] // SHOULD BE POST WITH DETAILS IN BODY
     public function updateLibraryBook(
-        ManagerRegistry $doctrine,
         Request $request,
+        LibraryService $libraryService,
         int $id
     ): Response {
-        $entityManager = $doctrine->getManager();
-        $book = $entityManager->getRepository(Library::class)->find($id);
+
+        $book = $libraryService->getRepoById($id);
         $form = $this->createForm(LibraryType::class, $book);
-        LibraryUtil::bookExists($book);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+        $isSuccess = $libraryService->modifyBook($form, $id);
+        if ($isSuccess) {
+            return $this->redirectToRoute("library_view_book", ["isbn" => $book->getIsbn()]);
         }
-        return $this->redirectToRoute("library_view_book", ["isbn" => $book->getIsbn()]);
+        return new Response("No book was deleted");
     }
 }
