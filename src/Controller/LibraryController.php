@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Form\LibraryType;
+use App\Library\LibraryUtil;
 
 class LibraryController extends AbstractController
 {
@@ -98,11 +99,7 @@ class LibraryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $isbn = $library->getIsbn();
             $book = $libRepository->findByIsbnField($isbn);
-            if (!$book) {
-                throw $this->createNotFoundException(
-                    "No book found on this isbn" . $isbn
-                );
-            }
+            LibraryUtil::bookExists($book);
             $entityManager->remove($book[0]);
             $entityManager->flush();
         }
@@ -119,11 +116,7 @@ class LibraryController extends AbstractController
         $entityManager = $doctrine->getManager();
         $book = $entityManager->getRepository(Library::class)->find($id);
         $form = $this->createForm(LibraryType::class, $book);
-        if (!$book) {
-            throw $this->createNotFoundException(
-                "No book found on this id"
-            );
-        }
+        LibraryUtil::bookExists($book);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
