@@ -37,7 +37,7 @@ class AdventureGameController extends AbstractController
     public function adventureGamePlay(
     ): Response {
         $curRoom = $this->sessionService->getSessionValueWithKey('current_room');
-        if ($this->sessionService->isNotSessionVariableSet("backpack") && 
+        if ($this->sessionService->isNotSessionVariableSet("backpack") && // Hide current room item if picked up
         $this->sessionService->isItemInBackpack($curRoom["item"])) {
                 $curRoom["item"] = "hide";
         }
@@ -50,12 +50,10 @@ class AdventureGameController extends AbstractController
     #[Route('/proj/adventure/interact_handler', name: 'adventure_interact_handler', methods: ["POST"])]
     
     public function adventureInteractHandler(
-        SessionInterface $session,
         Request $request
         ): Response {
         $formData = $request->request->get("sword");
-        
-        $session->set("backpack", [$formData]);
+        $this->sessionService->setBackPackContent($formData);
         return $this->redirectToRoute("adventure");
     }
     #[Route('/proj/adventure/next_room_handler', name: 'adventure_next_room_handler', methods: ["POST"])]
@@ -93,25 +91,7 @@ class AdventureGameController extends AbstractController
             //     $session->set("current_room", $value);
             // }
         }
-
-
         return new Response(json_encode($formData));
         // return $this->redirectToRoute("adventure");
     }
-    #[Route('/proj/adventure/next_room_handler_test', name: 'adventure_next_room_handler_test', methods: ["POST"])]
-    
-    public function adventureNextRoomHandlerTest(
-        SessionInterface $session,
-        Request $request
-        ): Response {
-        $formData = $request->request->all();
-        foreach ($formData as $_ => $value) {
-            $session->set("current_room", $value);
-        }
-
-
-        return new Response(json_encode($formData));
-        // return $this->redirectToRoute("adventure");
-    }
-    
 }

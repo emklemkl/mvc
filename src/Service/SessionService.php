@@ -39,12 +39,18 @@ class SessionService
         $this->session->set(self::CURRENT_ROOM, $this->adventureGame->rooms[$newRoom]);
     }
 
+    public function setBackPackContent($item) {
+        $backpackContent = $this->session->get(self::BACKPACK);
+        $backpackContent[] = $item;
+        $this->session->set(self::BACKPACK, $backpackContent);
+    }
+
     public function isNotSessionVariableSet($var) {
         return null !== $this->session->get($var);
     }
 
     public function isItemInBackpack($item) {
-        return in_array($item, $this->session->get("backpack"));
+        return in_array($item, $this->session->get(self::BACKPACK));
     }
 
     public function getSessionValueWithKey($key) {
