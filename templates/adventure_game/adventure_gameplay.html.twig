@@ -1,0 +1,96 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Metrics{% endblock %}
+
+{% block body %}
+  {# <img class="image" src="{{ asset('img/adventure/testroom.png') }}" alt="Metrics"> #}
+  <h1>Adventure game!</h1>
+  <div class="player_ui">
+
+
+  <div id="game_window" class={{room.image_class}}>
+
+  {# TOP #}
+    <div class="gameplan_rows room_top">
+      
+      <div class="room_ room_top_left">ASD</div>
+      <div class="room_ room_top_mid">
+        {% if room.action is not empty %}
+        {# {{room.action }} #}
+          <form  action="{{ path('adventure_attack_handler') }}" method="post">
+            <input type="text" name="{{room.action}}" id="{{room.action}}" value="{{room.action}}" hidden="true">
+            {# <input type="text" name="{{room.title}}" id="{{room.title}}" value="{{room.title}}" hidden="true">  #}
+            <input class="attack" type="submit" value="">
+          </form>
+
+
+        {% elseif room.forward is not empty %}
+        <form  action="{{ path('adventure_next_room_handler') }}" method="post">
+          <input type="text" name="{{room.forward}}" id="{{room.forward}}" value="{{room.forward}}" hidden="true">
+          {# <input type="text" name="{{room.title}}" id="{{room.title}}" value="{{room.title}}" hidden="true">  #}
+          <input class="transparent_door" type="submit" value="">
+        </form>
+        {% endif %}
+      </div>
+
+      <div class="room_ room_top_right">ASD</div>
+    
+    </div>
+
+  {# MID #}
+    <div class="gameplan_rows room_mid">
+      
+      <div class="room_ room_mid_left">
+        <form  action="{{ path('adventure_next_room_handler') }}" method="post">
+          <input type="text" name="{{room.left}}" id="{{room.left}}" value="{{room.left}}" hidden="true">
+            {% if room.left is not empty %}
+              <input class="transparent_door" type="submit" value="">
+            {% endif %}
+        </form>
+      </div>
+      <div class="room_ room_mid_mid">ASD</div>
+      <div class="room_ room_mid_right">ASD</div>
+    
+    </div>
+
+  {# LOW #}
+    <div class="gameplan_rows">
+
+      <div class="gameplan_rows room_bot">
+        
+        <div class="room_ room_bot_left">
+          <form  action="{{ path('adventure_interact_handler') }}" method="post">
+            <input type="text" name="{{room.item}}" id="{{room.item}}" value="{{room.item}}" hidden="true">
+            {% if room.item is not empty %}
+              <input class="{{ room.item }}" type="submit" value="">
+            {% endif %}
+          </form>
+        </div>
+
+        <div class="room_ room_bot_mid">
+          <form  action="{{ path('adventure_next_room_handler') }}" method="post">
+            <input type="text" name="{{room.back}}" id="{{room.back}}" value="{{room.back}}" hidden="true">
+              {% if room.back is not empty %}
+                <input class="transparent_door" type="submit" value="">
+              {% endif %}
+          </form>
+        </div>
+        <div class="room_ room_bot_right">ASD</div>
+      
+      </div>
+
+    </div> 
+  </div>
+    <section>
+      <h3>Inventory</h3>
+        {% for item in backpack %}
+          <div class="{{ item }}"></div>
+        {% endfor %}
+    </section>
+
+    <section class="story_text">
+
+          <p class="bread_text">{{ room.description }}</p>
+    </section>
+  </div>
+{% endblock %}

@@ -102,6 +102,6 @@ class GameController extends AbstractController
     public function clearSession(SessionInterface $session): Response
     {
         $session->clear();
-        return $this->redirectToRoute('game_landing');
+        return $this->redirectToRoute('adventure');
     }
 }

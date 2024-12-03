@@ -13,7 +13,7 @@
     <th>Cover</th>
         {% for book in all_books %}
         <tr>
-            <td> <a href="{{ path('library_view_book', {isbn: book.isbn|e } ) }}"> {{ book.getTitle|e }} </a> </td>
+            <td> <a class="a_link"  href="{{ path('library_view_book', {isbn: book.isbn|e } ) }}"> {{ book.getTitle|e }} </a> </td>
             <td> {{ book.getIsbn|e }} </td>
             <td> {{ book.getAuthor|e }} </td>
             <td> <img class="book_cover" src="{{ asset(book.getCover|e) }}" alt="A book cover"/>  </td>

@@ -1,5 +1,5 @@
-<a href="{{ path('api_game') }}">21 Game</a>
-<a href="{{ path('api_deck') }}">Deck (sorted)</a>
+<a class="a_link" href="{{ path('api_game') }}">21 Game</a>
+<a class="a_link" href="{{ path('api_deck') }}">Deck (sorted)</a>
 <form class="draw-form" method="post">
         <input class="draw-form-button" type="submit" value="Shuffle"
                 onClick="this.form.action='{{ path('api_deck_shuffle_post') }}';this.form.method='post';">

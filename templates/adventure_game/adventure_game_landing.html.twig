@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Metrics{% endblock %}
+
+{% block body %}
+  <h1>Adventure game!</h1>
+  <div id="game_window" class="start_menu">
+    <a class="big_white_text_button center_of_grid" href="{{ path('adventure') }}">Start Adventure</a>
+  </div>
+{% endblock %}
