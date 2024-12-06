@@ -1,19 +1,16 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Metrics{% endblock %}
-
+{% block title %}Adventure Game{% endblock %}
 {% block body %}
-  {# <img class="image" src="{{ asset('img/adventure/testroom.png') }}" alt="Metrics"> #}
-  <h1>Adventure game!</h1>
+  <section class="game-wrapper">
+  {# <div class="player_ui game-wrapper"> #}
   <div class="player_ui">
-
-
   <div id="game_window" class={{room.image_class}}>
 
   {# TOP #}
     <div class="gameplan_rows room_top">
       
-      <div class="room_ room_top_left">ASD</div>
+      <div class="room_ room_top_left"></div>
       <div class="room_ room_top_mid">
         {% if room.action is not empty %}
         {# {{room.action }} #}
@@ -28,12 +25,16 @@
         <form  action="{{ path('adventure_next_room_handler') }}" method="post">
           <input type="text" name="{{room.forward}}" id="{{room.forward}}" value="{{room.forward}}" hidden="true">
           {# <input type="text" name="{{room.title}}" id="{{room.title}}" value="{{room.title}}" hidden="true">  #}
+          {% if room.title == "third_cave_room"%}
+          <input class="transparent_door blood_spatter" type="submit" value="">
+          {% else %}
           <input class="transparent_door" type="submit" value="">
+          {% endif %}
         </form>
         {% endif %}
       </div>
 
-      <div class="room_ room_top_right">ASD</div>
+      <div class="room_ room_top_right"></div>
     
     </div>
 
@@ -48,8 +49,8 @@
             {% endif %}
         </form>
       </div>
-      <div class="room_ room_mid_mid">ASD</div>
-      <div class="room_ room_mid_right">ASD</div>
+      <div class="room_ room_mid_mid"></div>
+      <div class="room_ room_mid_right"></div>
     
     </div>
 
@@ -75,16 +76,26 @@
               {% endif %}
           </form>
         </div>
-        <div class="room_ room_bot_right">ASD</div>
+        <div class="room_ room_bot_right"></div>
       
       </div>
 
     </div> 
   </div>
-    <section>
+    <section class="inventory">
       <h3>Inventory</h3>
         {% for item in backpack %}
           <div class="{{ item }}"></div>
+        {% endfor %}
+        {% for message in app.flashes('enemy_status_defeated') %}
+            <div class="alert alert-success">
+                {{ message | raw}}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('enemy_status_alive') %}
+            <div class="alert alert-fail">
+                {{ message | raw}}
+            </div>
         {% endfor %}
     </section>
 
@@ -93,4 +104,20 @@
           <p class="bread_text">{{ room.description }}</p>
     </section>
   </div>
-{% endblock %}
+{# {% endblock %}  #}
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+    document.getElementsByTagName("body")[0].classList.add("dark-purple-background");
+    document.getElementsByTagName("footer")[0].classList.add("footer-alternative-color");
+    document.getElementsByTagName("header")[0].classList.add("header-alternative-background");
+    document.querySelectorAll(".a_link").forEach((link) => {
+      link.classList.add("a_link_alt")
+      link.classList.remove("a_link")
+    })
+    
+})
+</script>
+{% endblock %} 

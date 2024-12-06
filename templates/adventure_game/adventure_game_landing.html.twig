@@ -3,8 +3,21 @@
 {% block title %}Metrics{% endblock %}
 
 {% block body %}
-  <h1>Adventure game!</h1>
+  {# <h1>Adventure game!</h1> #}
   <div id="game_window" class="start_menu">
     <a class="big_white_text_button center_of_grid" href="{{ path('adventure') }}">Start Adventure</a>
   </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+    document.getElementsByTagName("body")[0].classList.add("dark-purple-background");
+    document.getElementsByTagName("footer")[0].classList.add("footer-alternative-color");
+    document.getElementsByTagName("header")[0].classList.add("header-alternative-background");
+    document.querySelectorAll(".a_link").forEach((link) => {
+      link.classList.add("a_link_alt")
+      link.classList.remove("a_link")
+    })
+    
+})
+</script>
 {% endblock %}

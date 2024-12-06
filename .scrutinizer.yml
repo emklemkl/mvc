@@ -2,7 +2,19 @@ imports:
     - php
 
 filter:
-    excluded_paths: [vendor/*, test/*]
+    excluded_paths:
+        - vendor/*
+        - test/*
+        - tests/*
+        - src/Migrations/*
+        - node_modules/*
+        - var/*
+        - tools/*
+        - public/*
+        - src/Repository/*
+        - src/Kernel.php
+        - bootstrap.php
+        - config/*
 
 build:
     image: default-bionic

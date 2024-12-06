@@ -2,25 +2,27 @@
 
 namespace App\Controller;
 
-use App\Dice\Dice;
-use App\Dice\DiceGraphic;
+use App\AdventureGame\AdventureGame;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use App\Form\AdventureType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 use App\Service\SessionService;
 
 
 class AdventureGameController extends AbstractController
 {
     private SessionService $sessionService;
+    private AdventureGame $adventureGame;
 
-    public function __construct(SessionService $sessionService)
+    public function __construct(
+        SessionService $sessionService,
+        AdventureGame $adventureGame
+        )
     {
         $this->sessionService = $sessionService;
+        $this->adventureGame = $adventureGame;
     }
 
     public const MIN_ROLL_WITH_WEAPON = 2;
@@ -71,27 +73,21 @@ class AdventureGameController extends AbstractController
     #[Route('/proj/adventure/attack_handler', name: 'adventure_attack_handler', methods: ["POST"])]
     
     public function adventureAttackHandler(
-        SessionInterface $session,
         Request $request
         ): Response {
+        $didEnemyDie = false;
         $formData = $request->request->get("attack");
         if ($formData == "attack") {
-
-            $dice = new DiceGraphic();
-            $playerRoll = $dice->roll();
-            if (in_array("sword", $session->get("backpack")) && $playerRoll >= self::MIN_ROLL_WITH_WEAPON) {
-                return new Response(json_encode("success $playerRoll"));
-            } 
-            if ($playerRoll >= self::MIN_ROLL_NO_WEAPON) {
-                return new Response(json_encode("success no weapon $playerRoll"));
-            } 
-            return new Response(json_encode("fail $playerRoll"));
-            
-            // foreach ($formData as $_ => $value) {
-            //     $session->set("current_room", $value);
-            // }
+            $roll = $this->adventureGame->roll();
+            $rollGraph = $this->adventureGame->rollGraphic();
+            $didEnemyDie = $this->adventureGame->attackEnemy($this->sessionService->isItemInBackpack("sword"), $roll);
+            if ($didEnemyDie) {
+                $this->addFlash('enemy_status_defeated', 'Rolled: ' . $rollGraph . '<br>Enemy defeated!');
+                $this->sessionService->killEnemyCurrentRoom();
+            } else {
+                $this->addFlash('enemy_status_alive', 'Rolled: ' . $rollGraph . '<br>Enemy Is still alive!');
+            }
         }
-        return new Response(json_encode($formData));
-        // return $this->redirectToRoute("adventure");
+        return $this->redirectToRoute("adventure");
     }
 }

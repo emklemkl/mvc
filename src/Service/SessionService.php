@@ -35,8 +35,30 @@ class SessionService
         }
     }
 
+    public function killEnemyCurrentRoom() {
+        $curRoom = $this->getCurrentRoom();
+        $rooms = $this->session->get(self::ROOMS);
+        $rooms[$curRoom["title"]]["action"] = "";
+        $this->session->set(self::ROOMS, $rooms);
+        $this->setCurrentRoom($curRoom["title"]);
+        $this->setNewRoomDescValue("You slew the beast!");
+    }
+
     public function setCurrentRoom($newRoom) {
-        $this->session->set(self::CURRENT_ROOM, $this->adventureGame->rooms[$newRoom]);
+        $rooms = $this->session->get(self::ROOMS);
+        $this->session->set(self::CURRENT_ROOM, $rooms[$newRoom]);
+    }
+
+    public function setNewRoomDescValue($newValue) {
+        $curRoom = $this->getCurrentRoom();
+        $rooms = $this->session->get(self::ROOMS);
+        $rooms[$curRoom["title"]]["description"] = $newValue;
+        $this->session->set(self::ROOMS, $rooms);
+        $this->setCurrentRoom($curRoom["title"]);
+    }
+
+    public function getCurrentRoom() {
+        return $this->session->get(self::CURRENT_ROOM);
     }
 
     public function setBackPackContent($item) {

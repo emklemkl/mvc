@@ -10,7 +10,7 @@ body {
 .container {
     display: flex;
     position: relative;
-    /* width: 64rem; */
+    padding: 2rem ;
     max-width: 100%;
     justify-content: center;
 }

@@ -12,5 +12,6 @@ import './styles/app.css';
 import './bootstrap';
 
 import'./js/hello.js';
+import'./js/adventure_style.js';
 
 // console.log(hello())

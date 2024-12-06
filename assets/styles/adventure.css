@@ -1,12 +1,63 @@
+/* Game room visuals! */
+
+.start_room {
+    background-image: url('../images/startcave.png') !important;
+    image-rendering: pixelated;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.second_cave {
+    background-image: url('../images/second_cave.png') !important;
+    image-rendering: pixelated;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.third_cave {
+    background-image: url('../images/third_cave.png') !important;
+    image-rendering: pixelated;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.winner {
+    background-image: url('../images/winner.png') !important;
+    image-rendering: pixelated;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* UI and general visibilities */
+.dark-purple-background {
+    background-color: #230024 !important;
+
+}
+
 #game_window {
     display: flex;
     flex-direction: column;
-    width: 40rem;
-    height: 30rem;
+    width: 31rem;
+    height: inherit;
+    align-items: flex-start;
+    border: #420341 solid 2px;
+    background-color: #420341;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+
+.game-wrapper {
+    background-color: #420341 !important;
+    height: 100%;
+    width: 100vw;
 }
 
 .gameplan_rows {
-    height: 10rem;
+    height: 8rem;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -16,58 +67,23 @@
 
 .start_menu {
     background: linear-gradient(0.25turn, #111, #666);
+    border-radius: 0.4rem;
 }
 
 .player_ui {
+    padding: 2rem;
+    margin-top: -2rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 3rem;
+    gap: 2rem;
+    background-color: #230024 !important;
+    height: 100%;
+    width: 100vw;
 }
 
-.start_room {
-    background-image: url('../images/startcave.png') !important;
-    image-rendering: pixelated;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.second_cave {
-    background-image: url('../images/second_cave.png') !important;
-    image-rendering: pixelated;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.third_cave {
-    background-image: url('../images/third_cave.png') !important;
-    image-rendering: pixelated;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.attack {
-    margin-top: 2rem;
-    padding: 2rem;
-    width: 5rem;
-    height: 6rem;
-    background-image: url('../images/enemy.png') !important;
-    image-rendering: pixelated;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: transparent;
-}
-
-.outside_cave {
-    background-image: url('../images/testroom.png') !important;
-    image-rendering: pixelated;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+.footer-alternative-color {
+    background-color: #420341 !important;
 }
 
 .hide {
@@ -81,8 +97,8 @@
 }
 
 .transparent_door {
-    width: 10rem;
-    height: 8rem;
+    width: 7rem;
+    height: 7rem;
     background-color: transparent;
 }
 
@@ -94,9 +110,55 @@
     height: 6rem;
     background-image: url('../images/sword.png') !important;
     image-rendering: pixelated;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.blood_spatter {
+    margin-top: 5rem;
+    background-image: url('../images/blood_spatter.png') !important;
+    image-rendering: pixelated;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.inventory {
+    color: #faebd7a8;
+    background-color: #420341;
+    padding: 0.4rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bread_text {
+    text-decoration: none;
+    width: 30rem;
+    color: rgb(38, 0, 0);
+    font-family: l;
+    font-size: 1.6rem;
+    font-family: "Papyrus", 'Fantasy', serif;
+    line-height: 2rem;
+    padding: 2.5rem;
+    background-color: rgb(159, 150, 150);
+    border: #420341 solid 4px;
+    border-radius: 0.5rem;
+}
+
+.attack {
+    margin-top: 5rem;
+    padding: 2rem;
+    width: 6rem;
+    height: 7rem;
+    background-image: url('../images/enemy.png') !important;
+    image-rendering: pixelated;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
 }
 
 .big_white_text_button {
@@ -104,25 +166,31 @@
     color: azure;
     font-family: l;
     font-size: 4rem;
+    margin: 1rem;
     font-family: "Papyrus", 'Fantasy', serif;
 }
-
-.bread_text {
-    text-decoration: none;
-    width: 70rem;
-    color: rgb(38, 0, 0);
-    font-family: l;
-    font-size: 2.5rem;
-    font-family: "Papyrus", 'Fantasy', serif;
-    line-height: 3rem;
-    padding: 2.5rem;
-    background-color: rgb(159, 150, 150);
-}
-
 
 .center_of_grid {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
     top: 50%;
+}
+
+/* Flash messages */
+.alert {
+    margin-top: 1.5rem;
+    max-width: 9rem;
+    border-radius: 0.3rem;
+    padding: 0.2rem;
+}
+
+.alert-success {
+    background-color: rgb(76, 110, 76);
+    font-size: 1.8rem;
+}
+
+.alert-fail {
+    background-color: rgb(130, 92, 92);
+    font-size: 1.8rem;
 }
