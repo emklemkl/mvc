@@ -37,4 +37,17 @@ class AdventureGameTest extends TestCase
         $game = new AdventureGame(new DiceGraphic);
         $this->assertFalse($game->attackEnemy(false, 5));
     }  
+    public function testRollInjectedDie() {
+        $game = new AdventureGame(new DiceGraphic);
+        $roll = $game->roll();
+        $this->assertIsInt($roll);
+        $this->assertGreaterThanOrEqual(1, $roll);
+        $this->assertLessThanOrEqual(6, $roll);
+    }  
+    public function testRollInjectedGraphicDie() {
+        $game = new AdventureGame(new DiceGraphic);
+        $game->roll();
+        $roll = $game->rollGraphic();
+        $this->assertIsString($roll);
+    }  
 }
