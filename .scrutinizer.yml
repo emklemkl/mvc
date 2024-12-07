@@ -12,6 +12,7 @@ filter:
         - tools/*
         - public/*
         - src/Repository/*
+        - src/Entity/*
         - src/Kernel.php
         - bootstrap.php
         - config/*
