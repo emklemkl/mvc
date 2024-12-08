@@ -16,6 +16,7 @@ filter:
         - src/Kernel.php
         - bootstrap.php
         - config/*
+        - src/Controller/*
 
 build:
     image: default-bionic
