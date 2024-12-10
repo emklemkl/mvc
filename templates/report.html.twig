@@ -209,7 +209,70 @@ har bara gjort lite basic anpassning.</p>
     <br>Min TIL är att jag har blivit bättre på att förstå och tillämpa ett objektorienterat tankesätt på kod. När vi läste denna kursen i årskurs ett så tyckte jag 
     det var väldigt utmanade. Nu har jag själv valt att ta ut svängarna lite på ett mer MVC och objektorienterat sätt i både kmom05-06 genom att använda services och att jobba 
     med Symfonys inbyggda funktionalitet, som exempelvis FormBuilderInterface. Jag hade fler saker jag ville prova men jag har tyvärr begränsad tid.</p>
+    
     <h2 id="kmom10">Kmom10</h2>
-    <p>Kmom1</p>
+{# 
+För varje krav du implementerat, dvs 1-3, 4, 5, 6, skriver du ett textstycke om ca 5-10 meningar där du beskriver hur du löste kravet. 
+
+Skriv ett allmänt stycke om hur projektet gick att genomföra. 
+Problem/lösningar/strul/enkelt/svårt/snabbt/lång tid, etc. 
+Var projektet lätt eller svårt? Tog det lång tid? 
+Vad var svårt och vad gick lätt? 
+Var det ett bra och rimligt projekt för denna kursen?
+
+Avsluta med ett sista stycke med dina tankar om kursen och vad du anser om materialet och handledningen (ca 5-10 meningar). 
+Ge feedback till lärarna och förslå eventuella förbättringsförslag till kommande kurstillfällen. 
+Är du nöjd/missnöjd? 
+Kommer du att rekommendera kursen till dina vänner/kollegor? 
+På en skala 1-10, vilket betyg ger du kursen? #}
+    <p><b>OBS! det finns ett cheat-sheet i proj/about</b></p>
+    <h3>Krav 1, 2 och 3</h3>
+
+    <p> Jag valde att placera all kommunikation med sessionen i SessionService, tanken va att denna skulle bli stateless, men som sagt, tiden går snabbt när 
+    man har roligt. Det var lite struligt att få igång då Symfony bara erbjuder SessionInterface out-of-the-box inuti just Controllers. Så för att komma åt SessionInterface inne i 
+    SessionService fick jag hämta den genom Dependency Injecta RequestStack stack i SessionService. Det var lite förvirrande först men när jag förstod detta så rullade det på fint, till 
+    jag skulle skriva tester. Det orsakade lite huvudbry hur jag faktiskt skulle testa SessionService när den i slutändan blev en mix av Service och logikklass (vilket, som tidigare nämnt 
+    inte va tanken). Jag insåg dock att jag övertänkte problemet fram till jag insåg att MockArraySessionStorage() fanns. Sen gick testande ganska smärtfritt (bortsett från ett och 
+    annat handhavandefel). Mitt mål var att göra AdventureGameControllern så liten som möjligt. Jag anser att lyckats med det (trots tidsbristen) då det inte ligger överdrivet mycket 
+    logik i den. Routsen är modulära då dem kan användas till alla möjliga rum som innehåller funktionaliteten så som "action", "forward, "item" och så vidare. Kikar man på bilden 
+    nedan så ser man strukturen på varje rum hur varje rum leder till nästa. Rummen innehåller saker att göra (actions, tex "attack"), saker att plocka upp (items, tex "sword") 
+    samt vägar att går och bildklass (bakgrunden för varje rum laddas med CSS). Detta innebär att koden är väldigt modulär och man kan skriva egna banor som man sedan injectar i 
+    AdventureGame-klassens konstruktor. Det finns olika routes som hanterar de olika handlingarna man kan ta. Exempelvis så hanterar "/proj/adventure/next_room_handler" vad som ska 
+    hända när man går till nästa kopplade rum (tex forward leder till ett nytt rum). '/proj/adventure/interact_handler' hanterar och uppdaterar session när spelaren plockat upp ett 
+    föremål och lagt i sin backpack så att föremålet sparas hos spelaren samt plockas bort i ifrån rummet man är i, med andra ord, om man plockar upp svärdet så är det kommer det inte 
+    synas om man går tillbaka till rummet senare. Detta hade såklart funkat minst lika bra att göra mot en databas, men som tidigare nämnt är tiden kort. Observera att jag har gjort det 
+minimum som finns för att den standard-banan som finns ska fungera, exempelvis finns ingen väg för "right" i spelet då jag inte behövde det. Det är dock väldigt enkelt att lägga till, det enda 
+man behöver göra copy-pasta "left" diven i html/twig-filen och uppdatera den för att hantera "right" istället.</p> 
+<p>Det finns lite valideringsfel i min kod som jag inte brytt mig om att hantera då det främst kommer från genererad kod från Doctrine. Jag kom upp till 78% kodtäckning enligt Scrutinizer, jag siktade på 90% 
+men valde att stanna där då jag testat det som är testbart. Ska jag göra mer tester så blir det en tidsfråga, och jag har redan lagt mycket tid så detta känns rimligt.</p>
+
+    <img class="rooms-pic" src="{{ asset('img/rooms_vis.png') }}" alt="Pic rooms game structure ">
+
+    <h3>Allmänt om projektet</h3>
+    <p>Generellt gick det ganska ok att genomföra projektet. Det stora problemet är att jag inte kodar likadant som jag gjorde för ett och ett halvt år sedan när denna kursen gick. 
+    Det är väldigt många saker som jag vill göra men som helt enkelt tar för lång tid. Jag hade tänkt implementera stateless services med interfaces till sessioner och/eller databas. Men 
+    med tanke på att jag inte är så van vid Php så tar det väldigt mycket tid att sätta sig in i hur man gör alla delar i just Php/Symfony. Jag lyckades rent teoretiskt relativt 
+    bra med att hålla logiken utanför AdventureGameController, men jag insåg efter ett tag att det redan gått mycket tid så jag fick börja snåla in på vad jag tänkt göra ganska 
+    drastiskt. Just att uppskatta och planera för hur lång tid något kommer ta är en svaghet jag har. <br> Dem största problem jag har haft har varit Symfony- och config-relaterade, 
+    exempelvis så bestämde sig Webpack för att helt plötsligt packetera programmet på ett sätt så att webbläsaren inte hittade hälften av filerna när appen kördes på studentservern. 
+    Det var dock en reltivt enkel fix, jag ändrar ".setPublicPath('/build')" till ".setPublicPath('/~emkl21/dbwebb-kurser/mvc/me/report/public/build')" i webpack.config.js innan jag ska 
+    publisera till studentservern.</p> 
+    <p>Med en ödmjuk ton skulle jag säga att projektet hade varit ganska klurigt om jag hunnit göra det när jag skulle i årskurs ett. Nu har jag medvetet gjort det svårt för mig 
+    genom att prova nya saker (vissa saker fungerade inte så då fick jag skrota dem, fast jag lärde mig något) då jag känner att jag vill lära mig på vägen och inte bara "ta mig igenom kursen". 
+    Så jag hoppas på lite översyn om jag gjort något okonvetionellt under tiden jag provat på olika saker. En av dem större utmaningarna var såklart Css och att få alla bilder att stanna där jag vill, 
+    men, kombinerar man flexbox med lite tålamod så blir det helt ok tillslut.</p>
+    <p>
+    Jag anser det vara extra utmanande att programmera för spel. Tänker man inte steget längre hela tiden så riskerar man att producera väldigt klumpig kod som inte är modulär. Jag och några kompisar har en 
+    game-dev/jam-träff (Godot-motorn) en gång i månaden och jag upplever liknande utmaningar där också, är man inte steget för så riskerar man besvärlig kod. Hoppas även att mina konstverk som jag ritat (jag ritade 
+    alla bilder själv lite snabbt för det kändes som att det skulle ta ännu längre tid att hitta bilder som passade mitt upplägg) är tydliga nog för att man ska se vad det föreställer.
+    </p>
+
+    <h3>Feeback</h3>
+    <p>
+    Det var rätt längesedan jag gick denna kurs så jag vet inte riktigt om jag har något att komma med, jag svarade på kursutvärderingen iaf och jag relativt positiv feedback vill jag minnas. Det enda jag tänkte på 
+    är att man riskerar att bli lite indirekt straffad rent betygsmässigt beroende på vilket projekt man väljer. Kortspelet som fanns som alternativ kändes som att man nästan var halvfärdigt med innan man ens började. 
+    Jag bryr mig inte jättemycket om betyg dock, så jag valde det som kändes mest roligt och utmanande, men det var ändå en tanke som dök upp.
+    Men annars tycker jag kursen var givande och intressant och gav utrymme för att prova på mycket olika saker.
+    </p>
 
 {% endblock %}
