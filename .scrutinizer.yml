@@ -14,9 +14,11 @@ filter:
         - src/Repository/*
         - src/Entity/*
         - src/Kernel.php
+        - templates/*
         - bootstrap.php
         - config/*
         - src/Controller/*
+        - assets/*
 
 build:
     image: default-bionic
