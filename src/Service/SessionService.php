@@ -55,6 +55,7 @@ class SessionService
         $rooms[$curRoom["title"]]["description"] = $newValue;
         $this->session->set(self::ROOMS, $rooms);
         $this->setCurrentRoom($curRoom["title"]);
+        
     }
 
     public function getCurrentRoom() {
@@ -77,5 +78,8 @@ class SessionService
 
     public function getSessionValueWithKey($key) {
         return $this->session->get($key);
+    }
+    public function getSessionRooms() {
+        return $this->session->get(self::ROOMS);
     }
 }

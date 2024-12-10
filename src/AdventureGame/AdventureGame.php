@@ -15,7 +15,7 @@ use App\Dice\DiceGraphic;
 class AdventureGame
 {
     public $rooms = [
-        'start' => [
+        'start' => [ // IMPORTANT! key and title must have same name
             'title' => 'start',
             'description' => "You wake up in a dim cave, the air damp and still. Trails of a struggle—scuffed dirt, scattered pebbles, and a faint smear of blood—lead into the shadows. Nearby, your trusted sword lies half-buried, its blade catching the faint light from above. Ahead, daylight glimmers on the jagged walls, beckoning you forward.",
             'image_class' => 'start_room',
@@ -79,8 +79,11 @@ class AdventureGame
     private $dice;
     public const MIN_ROLL_WITH_WEAPON = 2;
     public const MIN_ROLL_NO_WEAPON = 6;
-    public function __construct(DiceGraphic $dice)
+    public function __construct(DiceGraphic $dice, Array $rooms = [])
     {
+        if ($rooms) {
+            $this->rooms = $rooms;
+        }
         $this->dice = $dice;
     }
 
@@ -102,5 +105,9 @@ class AdventureGame
     public function rollGraphic()
     {
         return $this->dice->getAsString();
+    }
+
+    public function setRooms(array $rooms) {
+        $this->rooms = $rooms;
     }
 }

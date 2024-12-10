@@ -21,4 +21,14 @@ class DiceTest extends TestCase
         $res = $die->getAsString();
         $this->assertNotEmpty($res);
     }
+
+    public function testRollDice()
+    {
+        $expectedLow = 1;
+        $expectedHigh = 6;
+        $die = new Dice();
+        $die->roll();
+        $this->assertGreaterThanOrEqual($expectedLow, $die->getValue());
+        $this->assertLessThanOrEqual($expectedHigh, $die->getValue());
+    }
 }
