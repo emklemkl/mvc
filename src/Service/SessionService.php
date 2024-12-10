@@ -18,7 +18,8 @@ class SessionService
         $this->session = $requestStack->getSession();
         $this->adventureGame = $adventureGame;
     }
-    public function initSession() {
+    public function initSession()
+    {
         // print_r($this->adventureGame->rooms);
 
         if (!$this->session->has(self::ROOMS)) {
@@ -35,7 +36,8 @@ class SessionService
         }
     }
 
-    public function killEnemyCurrentRoom() {
+    public function killEnemyCurrentRoom()
+    {
         $curRoom = $this->getCurrentRoom();
         $rooms = $this->session->get(self::ROOMS);
         $rooms[$curRoom["title"]]["action"] = "";
@@ -44,42 +46,50 @@ class SessionService
         $this->setNewRoomDescValue("You slew the beast!");
     }
 
-    public function setCurrentRoom($newRoom) {
+    public function setCurrentRoom($newRoom)
+    {
         $rooms = $this->session->get(self::ROOMS);
         $this->session->set(self::CURRENT_ROOM, $rooms[$newRoom]);
     }
 
-    public function setNewRoomDescValue($newValue) {
+    public function setNewRoomDescValue($newValue)
+    {
         $curRoom = $this->getCurrentRoom();
         $rooms = $this->session->get(self::ROOMS);
         $rooms[$curRoom["title"]]["description"] = $newValue;
         $this->session->set(self::ROOMS, $rooms);
         $this->setCurrentRoom($curRoom["title"]);
-        
+
     }
 
-    public function getCurrentRoom() {
+    public function getCurrentRoom()
+    {
         return $this->session->get(self::CURRENT_ROOM);
     }
 
-    public function setBackPackContent($item) {
+    public function setBackPackContent($item)
+    {
         $backpackContent = $this->session->get(self::BACKPACK);
         $backpackContent[] = $item;
         $this->session->set(self::BACKPACK, $backpackContent);
     }
 
-    public function isNotSessionVariableSet($var) {
+    public function isNotSessionVariableSet($var)
+    {
         return null !== $this->session->get($var);
     }
 
-    public function isItemInBackpack($item) {
+    public function isItemInBackpack($item)
+    {
         return in_array($item, $this->session->get(self::BACKPACK));
     }
 
-    public function getSessionValueWithKey($key) {
+    public function getSessionValueWithKey($key)
+    {
         return $this->session->get($key);
     }
-    public function getSessionRooms() {
+    public function getSessionRooms()
+    {
         return $this->session->get(self::ROOMS);
     }
 }

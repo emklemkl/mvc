@@ -1,8 +1,8 @@
 MVC course repoo
 =====
 
-## About thi repo
-This repoa is my solution to the problems presented in the MVC course from the program "Webbprogrammering" at Blekinge Tekniska Högskola. The main idea is to learn about web related object oriented programming using the Model View Controller design. This repo contains the result ive produced while doing the tasks the course required. My Examination project is a short web based game where the goal is to escape capture from an enchanted cave.
+## About this repo
+This repo is my solution to the problems presented in the MVC course from the program "Webbprogrammering" at Blekinge Tekniska Högskola. The main idea is to learn about web related object oriented programming using the Model View Controller design. This repo contains the result ive produced while doing the tasks the course required. My Examination project is a short web based game where the goal is to escape capture from an enchanted cave.
 
 ## To use this repo
 Assuming you have set up SSH-keys (otherwise, just do it!), run:

@@ -55,10 +55,10 @@ class LibraryService
         return false; # Fail
     }
 
-    public function getRepoById($id)
+    public function getRepoById($bookId)
     {
         $entityManager = $this->doctrine->getManager();
-        $book = $entityManager->getRepository(Library::class)->find($id);
+        $book = $entityManager->getRepository(Library::class)->find($bookId);
         $this->libraryUtil::bookExists($book);
         return $book;
     }

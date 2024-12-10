@@ -69,18 +69,18 @@ use Symfony\Component\HttpFoundation\Request;
 
         public function testAddItemToBackpack()
         {
-            $test_item = "some_item";
+            $testItem = "some_item";
             $this->assertTrue($this->service->isNotSessionVariableSet("backpack"));
-            $this->service->setBackPackContent($test_item);
-            $this->assertTrue($this->service->isItemInBackpack($test_item));
+            $this->service->setBackPackContent($testItem);
+            $this->assertTrue($this->service->isItemInBackpack($testItem));
         }
         
         public function testGetSessionValueWithKey()
         {
-        $test_item = "some_item";
-            $this->service->setBackPackContent($test_item);
+        $testItem = "some_item";
+            $this->service->setBackPackContent($testItem);
             $this->assertIsArray($this->service->getSessionValueWithKey("backpack"));
-            $this->assertEquals($this->service->getSessionValueWithKey("backpack")[0], $test_item);
+            $this->assertEquals($this->service->getSessionValueWithKey("backpack")[0], $testItem);
         }
         public function testGetSessionRooms()
         {

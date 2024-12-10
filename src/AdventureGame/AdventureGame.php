@@ -2,7 +2,6 @@
 
 namespace App\AdventureGame;
 
-
 use App\Dice\DiceGraphic;
 
 /**
@@ -79,7 +78,7 @@ class AdventureGame
     private $dice;
     public const MIN_ROLL_WITH_WEAPON = 2;
     public const MIN_ROLL_NO_WEAPON = 6;
-    public function __construct(DiceGraphic $dice, Array $rooms = [])
+    public function __construct(DiceGraphic $dice, array $rooms = [])
     {
         if ($rooms) {
             $this->rooms = $rooms;
@@ -107,7 +106,8 @@ class AdventureGame
         return $this->dice->getAsString();
     }
 
-    public function setRooms(array $rooms) {
+    public function setRooms(array $rooms)
+    {
         $this->rooms = $rooms;
     }
 }
