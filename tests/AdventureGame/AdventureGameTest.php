@@ -15,6 +15,18 @@ class AdventureGameTest extends TestCase
      * Construct object and verify that the object has the expected
      * properties, use no arguments.
      */
+
+    public $rooms = [
+        'test' => [ // key and title must have same name
+            'title' => 'test', 
+            'description' => "test",
+            'image_class' => 'test',
+            'item' => 'test',
+            'action' => "test_attack",
+            'forward' => "test",
+            'left' => "test",
+            "back" => "test"
+        ],];
     public function testCreateAdventureGame()
     {
         $game = new AdventureGame(new DiceGraphic);
@@ -49,5 +61,10 @@ class AdventureGameTest extends TestCase
         $game->roll();
         $roll = $game->rollGraphic();
         $this->assertIsString($roll);
+    }  
+    public function testSetRoom() {
+        $game = new AdventureGame(new DiceGraphic);
+        $game->setRooms($this->rooms);
+        $this->assertEquals($game->rooms, $this->rooms);
     }  
 }
