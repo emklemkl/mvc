@@ -33,6 +33,11 @@ class AdventureGameController extends AbstractController
         $this->sessionService->initSession();
         return $this->render('adventure_game/adventure_game_landing.html.twig');
     }
+    #[Route('/proj/about', name: 'proj_about')]
+    public function aboutAdventure(
+    ): Response {
+        return $this->render('adventure_game/adventure_game_about.html.twig');
+    }
 
     #[Route('/proj/adventure', name: 'adventure')]
     

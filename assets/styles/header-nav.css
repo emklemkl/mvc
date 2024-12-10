@@ -32,6 +32,12 @@ ul {
     list-style-type: none;
 }
 
+nav {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
+}
 .a_link {
     border: 1px solid black;
     text-decoration: none;

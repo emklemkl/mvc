@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Metrics{% endblock %}
+
+{% block body %}
+  {# <h1>Adventure game!</h1> #}
+  <section style="padding: 3rem">
+    <h2>About the Adventure game</h2>
+    <p>My project is a DnD inspired browser game. It tells a simple story (told by me, with some editing and fast-tracking with GPT). It simply 
+    tells the story of a kidnapped adventurer who wakes up in an enchanted cavern. To win you need to defeat an opponent and find your way outside the cave. 
+    The combat is implemented by reusing the dice class that we created in earlier kmom:s. The combat is just pure luck as you either succeed or not based on your roll. My initial 
+    idea was to implement combat moves for the enemy as well, but due limited time I scrapped that idea.</p>
+
+    <h3>Cheat-sheet!</h3>
+    Kill enemy with sword requires a roll > 1 <br>
+    Kill enemy withOUT sword requires a roll > 5
+    <h4>First room</h4>
+    <ol>
+      <li>Pick up sword</li>
+      <li>Walk through the tunnel straight ahead</li>
+      <li>Crawl through the dark tunnel to your left</li>
+    </ol>
+    <h4>Second room</h4>
+    <ol>
+      <li>Crawl through the dark tunnel to your left</li>
+    </ol>
+    <h4>Third room</h4>
+    <ol>
+      <li>Click the enemy to attack (and pray that you roll high enough)</li>
+      <li>When the enemy is dead, use the exit the enemy was guarding</li>
+    </ol>
+    <h4>Fourth room</h4>
+    <ol>
+      <li>You are free!</li>
+      <li>Use reset in footer to play again</li>
+    </ol>
+  </section>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+    document.getElementsByTagName("body")[0].classList.add("dark-purple-background");
+    document.getElementsByTagName("footer")[0].classList.add("footer-alternative-color");
+    document.getElementsByTagName("header")[0].classList.add("header-alternative-background");
+    document.querySelectorAll(".a_link").forEach((link) => {
+      link.classList.add("a_link_alt")
+      link.classList.remove("a_link")
+    })
+    
+})
+</script>
+{% endblock %}
